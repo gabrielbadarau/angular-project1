@@ -1,0 +1,28 @@
+<!-- <div *ngIf="users.length">
+    <div *ngFor="let user of users">
+        <h1>
+            <a  [routerLink]="['/users',user.id]">
+                {{user.first_name}}
+            </a>
+        </h1>
+    </div>
+</div> -->
+
+<p-table [value]="users">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+            <tr class="row" [routerLink]="['/users',user.id]">
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+            </tr>
+    </ng-template>
+</p-table>

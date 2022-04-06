@@ -1,0 +1,1216 @@
+{
+  "transactions": [
+    {
+      "id": 100001,
+      "date": "10.10.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 600,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1001,
+          "description": "RTX 3080",
+          "amount": 1,
+          "price": 1500,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 2001,
+          "description": "RTX 3070Ti",
+          "amount": 1,
+          "price": 1000,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100002,
+      "date": "09.11.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 1500,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1021,
+          "description": "Lenovo Laptop",
+          "amount": 1,
+          "price": 1500,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100003,
+      "date": "06.02.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 300,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1234,
+          "description": "Office Chair",
+          "amount": 3,
+          "price": 100,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100004,
+      "date": "06.03.2021",
+      "category": "income",
+      "receiver": "emag",
+      "price": 300,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1234,
+          "description": "Office Chair",
+          "amount": 3,
+          "price": 100,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100005,
+      "date": "04.18.2021",
+      "category": "expenses",
+      "receiver": "B&B",
+      "price": 50,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1366,
+          "description": "Watch Fossil",
+          "amount": 1,
+          "price": 50,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100006,
+      "date": "05.18.2021",
+      "category": "expenses",
+      "receiver": "Elefant",
+      "price": 700,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1111,
+          "description": "Harry Potter 1",
+          "amount": 100,
+          "price": 1,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1112,
+          "description": "Harry Potter 2",
+          "amount": 100,
+          "price": 1,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1113,
+          "description": "Harry Potter 3",
+          "amount": 100,
+          "price": 1,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1114,
+          "description": "Harry Potter 4",
+          "amount": 100,
+          "price": 1,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1115,
+          "description": "Harry Potter 5",
+          "amount": 100,
+          "price": 1,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1116,
+          "description": "Harry Potter 6",
+          "amount": 100,
+          "price": 1,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1117,
+          "description": "Harry Potter 7",
+          "amount": 100,
+          "price": 1,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100007,
+      "date": "05.18.2021",
+      "category": "expenses",
+      "receiver": "Elefant",
+      "price": 350,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1221,
+          "description": "Fantastic Beasts 1",
+          "amount": 1,
+          "price": 100,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1222,
+          "description": "Fantastic Beasts 2",
+          "amount": 1,
+          "price": 100,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1223,
+          "description": "Fantastic Beasts 3",
+          "amount": 1,
+          "price": 150,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100008,
+      "date": "08.29.2021",
+      "category": "expenses",
+      "receiver": "PC Garage",
+      "price": 3000,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1555,
+          "description": "Asus Rog PC",
+          "amount": 1,
+          "price": 3000,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100009,
+      "date": "04.03.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 25,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1639,
+          "description": "Teddy Bears",
+          "amount": 3,
+          "price": 5,
+          "VAT": 5,
+          "total_price": 0
+        },
+        {
+          "id": 1852,
+          "description": "Bunny",
+          "amount": 1,
+          "price": 10,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100010,
+      "date": "07.13.2021",
+      "category": "expenses",
+      "receiver": "Police",
+      "price": 250,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1251,
+          "description": "Police Watch",
+          "amount": 1,
+          "price": 250,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100011,
+      "date": "10.30.2021",
+      "category": "expenses",
+      "receiver": "Zara",
+      "price": 100,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1632,
+          "description": "Shirt Red",
+          "amount": 1,
+          "price": 60,
+          "VAT": 5,
+          "total_price": 0
+        },
+        {
+          "id": 1478,
+          "description": "Shirt Black",
+          "amount": 1,
+          "price": 40,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100012,
+      "date": "11.08.2021",
+      "category": "expenses",
+      "receiver": "Zara Home",
+      "price": 575,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 3050,
+          "description": "Bed",
+          "amount": 1,
+          "price": 575,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100013,
+      "date": "07.16.2021",
+      "category": "income",
+      "receiver": "Police",
+      "price": 250,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1251,
+          "description": "Police Watch",
+          "amount": 1,
+          "price": 250,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100014,
+      "date": "01.01.2021",
+      "category": "expenses",
+      "receiver": "Adobe",
+      "price": 150,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 4444,
+          "description": "Adobe Pack",
+          "amount": 1,
+          "price": 150,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100015,
+      "date": "01.10.2021",
+      "category": "expenses",
+      "receiver": "AVstore",
+      "price": 750,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1582,
+          "description": "Headphones Red",
+          "amount": 1,
+          "price": 350,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1583,
+          "description": "Headphones Black",
+          "amount": 2,
+          "price": 150,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1584,
+          "description": "Headphones White",
+          "amount": 1,
+          "price": 100,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100016,
+      "date": "02.09.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 60,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1596,
+          "description": "Roses",
+          "amount": 1,
+          "price": 60,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100017,
+      "date": "02.26.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 10,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 2653,
+          "description": "Knife stand",
+          "amount": 1,
+          "price": 10,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100018,
+      "date": "03.08.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 65,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 3968,
+          "description": "T-shirt",
+          "amount": 13,
+          "price": 5,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100019,
+      "date": "03.20.2021",
+      "category": "expenses",
+      "receiver": "PCgarage",
+      "price": 500,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 3030,
+          "description": "Intel i9 11th gen",
+          "amount": 1,
+          "price": 500,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100020,
+      "date": "04.04.2021",
+      "category": "expenses",
+      "receiver": "Altex",
+      "price": 175,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1696,
+          "description": "16GB DDR4 RAM",
+          "amount": 1,
+          "price": 175,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100021,
+      "date": "04.23.2021",
+      "category": "expenses",
+      "receiver": "Altex",
+      "price": 250,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 3669,
+          "description": "Wash Machine",
+          "amount": 1,
+          "price": 250,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100022,
+      "date": "04.25.2021",
+      "category": "expenses",
+      "receiver": "Sportisimo",
+      "price": 600,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 2887,
+          "description": "Running Shoes Nike",
+          "amount": 2,
+          "price": 100,
+          "VAT": 5,
+          "total_price": 0
+        },
+        {
+          "id": 2888,
+          "description": "Running Shoes Jordan",
+          "amount": 1,
+          "price": 200,
+          "VAT": 5,
+          "total_price": 0
+        },
+        {
+          "id": 2889,
+          "description": "Running Shoes Puma",
+          "amount": 2,
+          "price": 100,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100023,
+      "date": "05.01.2021",
+      "category": "expenses",
+      "receiver": "Altex",
+      "price": 250,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1837,
+          "description": "PC Case Asus",
+          "amount": 1,
+          "price": 150,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 1866,
+          "description": "PC Case Antec",
+          "amount": 2,
+          "price": 50,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100024,
+      "date": "05.06.2021",
+      "category": "income",
+      "receiver": "emag",
+      "price": 500,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1328,
+          "description": "RTX 2080",
+          "amount": 2,
+          "price": 250,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100025,
+      "date": "05.15.2021",
+      "category": "expenses",
+      "receiver": "PCgarage",
+      "price": 630,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 2489,
+          "description": "Cooler",
+          "amount": 3,
+          "price": 210,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100026,
+      "date": "05.20.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 2500,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 2956,
+          "description": "SSD",
+          "amount": 5,
+          "price": 500,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100027,
+      "date": "05.26.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 950,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 3699,
+          "description": "RTX 3050",
+          "amount": 1,
+          "price": 950,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100028,
+      "date": "06.06.2021",
+      "category": "expenses",
+      "receiver": "Zara",
+      "price": 800,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 3000,
+          "description": "Shirts",
+          "amount": 4,
+          "price": 100,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 3003,
+          "description": "Coat",
+          "amount": 2,
+          "price": 200,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100029,
+      "date": "06.09.2021",
+      "category": "expenses",
+      "receiver": "Zara",
+      "price": 200,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 3033,
+          "description": "Jeans",
+          "amount": 1,
+          "price": 200,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100030,
+      "date": "06.10.2021",
+      "category": "expenses",
+      "receiver": "Sportisimo",
+      "price": 290,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 4320,
+          "description": "Hoodie",
+          "amount": 1,
+          "price": 290,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100031,
+      "date": "07.07.2021",
+      "category": "expenses",
+      "receiver": "Zara",
+      "price": 660,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 3336,
+          "description": "Skirts",
+          "amount": 6,
+          "price": 110,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100032,
+      "date": "07.16.2021",
+      "category": "expenses",
+      "receiver": "Altex",
+      "price": 565,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 1999,
+          "description": "Fridge",
+          "amount": 1,
+          "price": 565,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100033,
+      "date": "07.18.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 50,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 5858,
+          "description": "Screws",
+          "amount": 500,
+          "price": 50,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100034,
+      "date": "08.21.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 25,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 5252,
+          "description": "Wrist bracket",
+          "amount": 1,
+          "price": 25,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100035,
+      "date": "08.22.2021",
+      "category": "income",
+      "receiver": "emag",
+      "price": 25,
+      "VAT": 5,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 5252,
+          "description": "Wrist bracket",
+          "amount": 1,
+          "price": 25,
+          "VAT": 5,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100036,
+      "date": "07.17.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 70,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 2683,
+          "description": "Leather Lion bracket",
+          "amount": 1,
+          "price": 70,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100037,
+      "date": "07.09.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 800,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 6393,
+          "description": "Samsung Fold",
+          "amount": 1,
+          "price": 800,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100038,
+      "date": "07.03.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 300,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 6395,
+          "description": "Xiaomi Note10",
+          "amount": 1,
+          "price": 300,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100039,
+      "date": "06.28.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 180,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 6399,
+          "description": "Samsung Note 8",
+          "amount": 1,
+          "price": 180,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100040,
+      "date": "06.27.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 400,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 6400,
+          "description": "Samsung Note 10",
+          "amount": 1,
+          "price": 400,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100041,
+      "date": "06.25.2021",
+      "category": "expenses",
+      "receiver": "Altex",
+      "price": 420,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 6500,
+          "description": "Windows 10",
+          "amount": 2,
+          "price": 210,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100042,
+      "date": "03.20.2021",
+      "category": "expenses",
+      "receiver": "Sportisimo",
+      "price": 85,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 2009,
+          "description": "Box Gloves",
+          "amount": 1,
+          "price": 85,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100043,
+      "date": "04.15.2021",
+      "category": "expenses",
+      "receiver": "Sportisimo",
+      "price": 325,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 2109,
+          "description": "Box bag",
+          "amount": 1,
+          "price": 250,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 2039,
+          "description": "Aid Kit",
+          "amount": 1,
+          "price": 75,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100044,
+      "date": "02.17.2021",
+      "category": "expenses",
+      "receiver": "emag",
+      "price": 125,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 8888,
+          "description": "Gift Basket",
+          "amount": 1,
+          "price": 125,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100045,
+      "date": "01.22.2021",
+      "category": "expenses",
+      "receiver": "B&B",
+      "price": 800,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 6669,
+          "description": "Festina Watch",
+          "amount": 1,
+          "price": 100,
+          "VAT": 10,
+          "total_price": 0
+        },
+        {
+          "id": 6670,
+          "description": "Swiss Watch",
+          "amount": 2,
+          "price": 350,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100046,
+      "date": "01.06.2021",
+      "category": "expenses",
+      "receiver": "Elefant",
+      "price": 55,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 3581,
+          "description": "Witcher Pack Books",
+          "amount": 1,
+          "price": 55,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    },
+    {
+      "id": 100047,
+      "date": "05.18.2021",
+      "category": "expenses",
+      "receiver": "B&B",
+      "price": 1000,
+      "VAT": 10,
+      "total_price": 0,
+      "products": [
+        {
+          "id": 9999,
+          "description": "Gold Ring",
+          "amount": 1,
+          "price": 1000,
+          "VAT": 10,
+          "total_price": 0
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "first_name": "Daniel",
+      "last_name": "Mihu",
+      "id": 1005,
+      "email": "Mihai_Mihu@gmail.com",
+      "password": "rtyfghvbn",
+      "profile_picture": "../../../assets/b5.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Anastasia",
+      "last_name": "Mirela",
+      "id": 1006,
+      "email": "Anastasia_Mirela@gmail.com",
+      "password": "yuihjkbnm",
+      "profile_picture": "../../../assets/b6.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Catalin",
+      "last_name": "Para",
+      "id": 1007,
+      "email": "Catalin_Para@gmail.com",
+      "password": "poilkjmnb",
+      "profile_picture": "../../../assets/b7.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Norbi",
+      "last_name": "King",
+      "id": 1009,
+      "email": "Norbi_Adams@gmail.com",
+      "password": "678yuibub",
+      "profile_picture": "../../../assets/b9.jpg",
+      "role": "Designer",
+      "permissions": "Chunin"
+    },
+    {
+      "first_name": "Darius",
+      "last_name": "Berenghi",
+      "id": 1010,
+      "email": "Darius_Berenghi@gmail.com",
+      "password": "789456123",
+      "profile_picture": "../../../assets/b10.jpg",
+      "role": "UX/UI Specialist",
+      "permissions": "Chunin"
+    },
+    {
+      "first_name": "Mirela",
+      "last_name": "Baciu",
+      "id": 1011,
+      "email": "Mirabela_Baciu@gmail.com",
+      "password": "yuihjk908",
+      "profile_picture": "../../../assets/b11.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Andreea",
+      "last_name": "Cretu",
+      "id": 1012,
+      "email": "Andreea_Cretu@gmail.com",
+      "password": "dfgcvbert",
+      "profile_picture": "../../../assets/b12.jpg",
+      "role": "Tester",
+      "permissions": "Chunin"
+    },
+    {
+      "first_name": "Vladimir",
+      "last_name": "Ionescu",
+      "id": 1013,
+      "email": "Vladimir_Ionescu@gmail.com",
+      "password": "gjkdlp908",
+      "profile_picture": "../../../assets/b13.jpg",
+      "role": "Tester",
+      "permissions": "Chunin"
+    },
+    {
+      "first_name": "Valentin",
+      "last_name": "Caprioreanu",
+      "id": 1014,
+      "email": "Valentin_Caprioreanu@gmail.com",
+      "password": "903d458",
+      "profile_picture": "../../../assets/b14.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Garofita",
+      "last_name": "Magdalena",
+      "id": 1015,
+      "email": "Garofita_Magdalena@gmail.com",
+      "password": "lolkikjuj",
+      "profile_picture": "../../../assets/b15.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Bella",
+      "last_name": "Bucur",
+      "email": "Bella_Bucur@gmail.com",
+      "password": "ijn9ij0ok",
+      "profile_picture": "../../../assets/b17.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Marcus",
+      "last_name": "Beregata",
+      "email": "Marcurs_Beregata@gmail.com",
+      "password": "lkolkolko",
+      "profile_picture": "../../../assets/b18.jpg",
+      "role": "Developer",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Ioana",
+      "last_name": "Lavinia",
+      "email": "Ioana_Lavinia@gmail.com",
+      "password": "asadeccer",
+      "profile_picture": "../../../assets/b19.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    }
+  ],
+  "users2": [
+    {
+      "first_name": "Bella",
+      "last_name": "Bucur",
+      "email": "Bella_Bucur@gmail.com",
+      "password": "ijn9ij0ok",
+      "profile_picture": "../../../assets/b17.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Marcus",
+      "last_name": "Beregata",
+      "email": "Marcurs_Beregata@gmail.com",
+      "password": "lkolkolko",
+      "profile_picture": "../../../assets/b18.jpg",
+      "role": "Developer",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Ioana",
+      "last_name": "Lavinia",
+      "email": "Ioana_Lavinia@gmail.com",
+      "password": "asadeccer",
+      "profile_picture": "../../../assets/b19.jpg",
+      "role": "User",
+      "permissions": "Genin"
+    },
+    {
+      "first_name": "Stefan",
+      "last_name": "Calugar",
+      "email": "Stefan_Calugar@gmail.com",
+      "password": "999666333",
+      "profile_picture": "../../../assets/b20.jpg",
+      "role": "Designer",
+      "permissions": "Genin"
+    }
+  ]
+}
