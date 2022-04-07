@@ -26,4 +26,23 @@ export class UsersService {
       })
     )
   }
+
+  getId(id:number):Observable<Iusers>{
+
+    if(this.users){
+      const foundUser=this.users.find(user=>user.id===id);
+      if(foundUser){
+        return of(foundUser);
+      }
+    }
+    const userUrl=`${this.usersUrl}/${id}`;
+    return this.http.get<Iusers>(userUrl)
+    .pipe(
+      tap(data=>{
+        console.log(data)
+      })
+    )
+  }
+
+
 }

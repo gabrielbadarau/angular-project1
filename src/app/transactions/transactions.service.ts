@@ -26,4 +26,22 @@ export class TransactionsService {
       })
     )
   }
+
+  getId(id:number):Observable<Itransactions>{
+
+    if(this.transactions){
+      const foundTransaction=this.transactions.find(transaction=>transaction.id===id)
+      if(foundTransaction){
+        return of(foundTransaction);
+      }
+    }
+    const transactionUrl=`${this.transactionsUrl}/${id}`
+    return this.http.get<Itransactions>(transactionUrl)
+    .pipe(
+      tap(data=>{
+          console.log(data);
+        }
+      )
+    )
+  }
 }
