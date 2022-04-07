@@ -5,6 +5,7 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 
 import {TableModule} from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {TableModule} from 'primeng/table';
   imports: [
     CommonModule,
     TableModule,
+    ButtonModule,
     RouterModule.forChild([
       {path:'users', component:UsersListComponent},
       {path:'users/:id', component:UserDetailComponent}

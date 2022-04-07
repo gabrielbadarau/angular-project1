@@ -5,6 +5,7 @@ import { TransactionsListComponent } from './transactions-list/transactions-list
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 
 import {TableModule} from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {TableModule} from 'primeng/table';
   imports: [
     CommonModule,
     TableModule,
+    ButtonModule,
     RouterModule.forChild([
       {path:'transactions', component:TransactionsListComponent},
       {path:'transactions/:id', component:TransactionDetailComponent}
