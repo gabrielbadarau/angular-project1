@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { Iusers } from './users';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
+
 export class UsersService {
   private usersUrl='http://localhost:3004/users'; 
   private users:Iusers[]=[];

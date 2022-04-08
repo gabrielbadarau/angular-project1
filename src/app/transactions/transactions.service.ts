@@ -3,9 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
 import { Itransactions } from './transactions';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
 export class TransactionsService {
   private transactionsUrl='http://localhost:3004/transactions';
   private transactions: Itransactions[]=[];

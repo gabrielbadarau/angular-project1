@@ -1,7 +1,13 @@
 
-<div class="header">
-  <p-tabMenu [model]="headerItems"></p-tabMenu>
-  <!-- Is there some way to center the itmes??? -->
+<div class="header flex flex-row flex-nowrap justify-content-between align-items-center">
+
+  <div class="logo">
+    <a routerLink="/" >Payment Application</a>
+  </div>
+
+  <div class="user">
+    <button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-info"></button>
+  </div>
 </div>
 
 <p-sidebar [style]="{width:'220px'}" class="nav-side" [(visible)]="visibleSidebar1" [baseZIndex]="10000">
@@ -15,7 +21,7 @@
 <div class="flex flex-row flex-wrap">
 
   <div class="right-button-container">
-    <p-button class="right-button" type="button" (click)="visibleSidebar1 = true" icon="pi pi-caret-right"></p-button>
+    <p-button class="right-button" type="button" (click)="visibleSidebar1 = true" icon="pi pi-bars"></p-button>
   </div>
   
   <div class="main-content">

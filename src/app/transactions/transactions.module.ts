@@ -6,6 +6,7 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
 
 import {TableModule} from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { TransactionsService } from './transactions.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,9 @@ import { ButtonModule } from 'primeng/button';
       {path:'transactions', component:TransactionsListComponent},
       {path:'transactions/:id', component:TransactionDetailComponent}
     ])
+  ],
+  providers:[
+    TransactionsService
   ]
 })
 export class TransactionsModule { }
