@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
 import { Itransactions } from './transactions';
+import localhost from '../localhost';
 
 @Injectable()
 
 export class TransactionsService {
-  private transactionsUrl='http://localhost:3004/transactions';
+  private transactionsUrl=localhost+'/transactions';
   private transactions: Itransactions[]=[];
 
   constructor(private http:HttpClient) { }
