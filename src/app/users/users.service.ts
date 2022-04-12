@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { Iusers } from './users';
-import localhost from '../localhost';
+import LOCALHOST from '../localhost';
 
 
 @Injectable()
 
 export class UsersService {
-  private usersUrl=localhost+'/users'; 
+  private usersUrl=LOCALHOST+'/users'; 
   private users:Iusers[]=[];
 
   constructor(private http:HttpClient) { }

@@ -13,8 +13,8 @@
 <p-sidebar [style]="{width:'220px'}" class="nav-side" [(visible)]="visibleSidebar1" [baseZIndex]="10000">
   <h1 i18n style="font-weight:bold">Navigation</h1>
   <div class="flex flex-column">
-    <a routerLink="transactions"><p-button [style]="{width:'150px'}" type="button" (click)="visibleSidebar1 = false" label="Transactions" styleClass="p-button-primary"></p-button></a>
-    <a routerLink="users"><p-button [style]="{width:'150px'}"  class="nav-button" type="button" (click)="visibleSidebar1 = false" label="Users" styleClass="p-button-primary"></p-button></a>
+    <a routerLink="transactions"><p-button [style]="{width:'150px'}" type="button" (click)="visibleSidebar1 = false" i18n-label label="Transactions" styleClass="p-button-primary"></p-button></a>
+    <a routerLink="users"><p-button [style]="{width:'150px'}"  class="nav-button" type="button" (click)="visibleSidebar1 = false" i18n-label label="Users" styleClass="p-button-primary"></p-button></a>
   </div>
 </p-sidebar>
 
