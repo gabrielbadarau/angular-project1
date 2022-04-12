@@ -1,0 +1,121 @@
+<h2 class="edit-title">Edit User Information</h2>
+<div class="card">
+    <form
+        novalidate
+        [formGroup]="userForm"
+        (ngSubmit)="save()"
+    >
+        <div class="field">
+            <label i18n for="firstname">First Name</label>
+            <input 
+            id="firstname" 
+            type="text" 
+            class="inputfield w-full"
+            formControlName="first_name"
+            [ngClass]="{'error':userForm.get('first_name')?.errors}">
+            <span i18n *ngIf="userForm.get('first_name').errors?.['required']">
+                Please enter a first name.
+            </span>
+        </div>
+        <div class="field">
+            <label i18n for="lastname">Last Name</label>
+            <input 
+            id="lastname" 
+            type="text" 
+            class="inputfield w-full"
+            formControlName="last_name"
+            [ngClass]="{'error':userForm.get('last_name')?.errors}">
+            <span i18n *ngIf="userForm.get('last_name').errors?.['required']">
+                Please enter a last name.
+            </span>
+        </div>
+        <div class="field">
+            <label i18n for="id">ID</label>
+            <input 
+            id="id" 
+            type="number" 
+            class="inputfield w-full"
+            formControlName="id"
+            [ngClass]="{'error':userForm.get('id')?.errors}">
+            <span i18n *ngIf="userForm.get('id').errors?.['required']">
+                Please enter an ID.
+            </span>
+            <span i18n *ngIf="userForm.get('id').errors?.['min']">
+                Minimum ID is 1.
+            </span>
+        </div>
+        <div class="field">
+            <label i18n for="email">Email</label>
+            <input
+             id="email" 
+             type="email" 
+             class="inputfield w-full"
+             formControlName="email"
+             [ngClass]="{'error':userForm.get('email')?.errors}">
+             <span i18n *ngIf="userForm.get('email').errors?.['required']">
+                Please enter an email.
+            </span>
+            <span i18n *ngIf="userForm.get('email').errors?.['email']">
+                Please enter a valid email.
+            </span>
+        </div>
+        <div class="field">
+            <label i18n for="password">Password</label>
+            <input 
+            id="password" 
+            type="text" 
+            class="inputfield w-full"
+            formControlName="password"
+            [ngClass]="{'error':userForm.get('password')?.errors}">
+            <span i18n *ngIf="userForm.get('password').errors?.['required']">
+                Please enter a password.
+            </span>
+        </div>
+        <div class="field">
+            <label i18n for="role">Role</label>
+            <input
+             id="role" 
+             type="text" 
+             class="inputfield w-full"
+             formControlName="role"
+             [ngClass]="{'error':userForm.get('role')?.errors}">
+             <span i18n *ngIf="userForm.get('role').errors?.['required']">
+                Please enter a role.
+            </span>
+        </div>
+        <div class="field">
+            <label i18n for="permissions">Permissions</label>
+            <input 
+            id="permissions" 
+            type="text" 
+            class="inputfield w-full"
+            formControlName="permissions"
+            [ngClass]="{'error':userForm.get('permissions')?.errors}">
+            <span i18n *ngIf="userForm.get('permissions').errors?.['required']">
+                Please enter the permissions.
+            </span>
+        </div>
+    
+        <div class="button-list">
+            <p-button 
+            type="submit" 
+            styleClass="p-button-sm"
+            [disabled]="!userForm.valid"
+            i18n
+           >
+            Save
+            </p-button>
+
+            <p-button 
+            styleClass="p-button-sm"
+            type="button" 
+            (click)="cancel()"
+            i18n>Cancel</p-button>
+
+            <p-button 
+            styleClass="p-button-sm"
+            type="button"
+            i18n>Delete</p-button>
+        </div>
+    </form>
+</div>
