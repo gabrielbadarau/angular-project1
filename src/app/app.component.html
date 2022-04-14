@@ -1,21 +1,27 @@
 
-<div class="header">
-  <p-tabMenu [model]="headerItems"></p-tabMenu>
-  <!-- Is there some way to center the itmes??? -->
+<div class="header flex flex-row flex-nowrap justify-content-between align-items-center">
+
+  <div class="logo">
+    <a i18n routerLink="/" >Payment Application</a>
+  </div>
+
+  <div class="user">
+    <button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-info"></button>
+  </div>
 </div>
 
 <p-sidebar [style]="{width:'220px'}" class="nav-side" [(visible)]="visibleSidebar1" [baseZIndex]="10000">
-  <h1 style="font-weight:bold">Navigation</h1>
+  <h1 i18n style="font-weight:bold">Navigation</h1>
   <div class="flex flex-column">
-    <a routerLink="transactions"><p-button [style]="{width:'150px'}" type="button" (click)="visibleSidebar1 = false" label="Transactions" styleClass="p-button-primary"></p-button></a>
-    <a routerLink="users"><p-button [style]="{width:'150px'}"  class="nav-button" type="button" (click)="visibleSidebar1 = false" label="Users" styleClass="p-button-primary"></p-button></a>
+    <a routerLink="transactions"><p-button [style]="{width:'150px'}" type="button" (click)="visibleSidebar1 = false" i18n-label label="Transactions" styleClass="p-button-primary"></p-button></a>
+    <a routerLink="users"><p-button [style]="{width:'150px'}"  class="nav-button" type="button" (click)="visibleSidebar1 = false" i18n-label label="Users" styleClass="p-button-primary"></p-button></a>
   </div>
 </p-sidebar>
 
 <div class="flex flex-row flex-wrap">
 
   <div class="right-button-container">
-    <p-button class="right-button" type="button" (click)="visibleSidebar1 = true" icon="pi pi-caret-right"></p-button>
+    <p-button class="right-button" type="button" (click)="visibleSidebar1 = true" icon="pi pi-bars"></p-button>
   </div>
   
   <div class="main-content">

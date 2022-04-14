@@ -6,6 +6,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 import {TableModule} from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { UsersService } from './users.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,9 @@ import { ButtonModule } from 'primeng/button';
       {path:'users', component:UsersListComponent},
       {path:'users/:id', component:UserDetailComponent}
     ])
+  ],
+  providers:[
+    UsersService
   ]
 })
 export class UsersModule { }
