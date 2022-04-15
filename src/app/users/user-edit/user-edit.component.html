@@ -1,4 +1,3 @@
-<h2 class="edit-title">Edit User Information</h2>
 <div class="card">
     <form
         novalidate
@@ -8,92 +7,99 @@
         <div class="field">
             <label i18n for="firstname">First Name</label>
             <input 
+            pInputText
             id="firstname" 
             type="text" 
-            class="inputfield w-full"
+            class="p-inputtext-sm inputfield w-full"
             formControlName="first_name"
-            [ngClass]="{'error':userForm.get('first_name')?.errors}">
-            <span i18n *ngIf="userForm.get('first_name').errors?.['required']">
+            [ngClass]="{'p-error':userForm.get('first_name')?.errors}">
+            <small class="p-error" i18n *ngIf="userForm.get('first_name').errors?.['required']">
                 Please enter a first name.
-            </span>
+            </small>
         </div>
         <div class="field">
             <label i18n for="lastname">Last Name</label>
             <input 
+            pInputText
             id="lastname" 
             type="text" 
-            class="inputfield w-full"
+            class="p-inputtext-sm inputfield w-full"
             formControlName="last_name"
-            [ngClass]="{'error':userForm.get('last_name')?.errors}">
-            <span i18n *ngIf="userForm.get('last_name').errors?.['required']">
+            [ngClass]="{'p-error':userForm.get('last_name')?.errors}">
+            <small class="p-error" i18n *ngIf="userForm.get('last_name').errors?.['required']">
                 Please enter a last name.
-            </span>
+            </small>
         </div>
         <div class="field">
             <label i18n for="id">ID</label>
             <input 
+            pInputText
             id="id" 
             type="number" 
-            class="inputfield w-full"
+            class="p-inputtext-sm inputfield w-full"
             formControlName="id"
-            [ngClass]="{'error':userForm.get('id')?.errors}">
-            <span i18n *ngIf="userForm.get('id').errors?.['required']">
+            [ngClass]="{'p-error':userForm.get('id')?.errors}">
+            <small class="p-error" i18n *ngIf="userForm.get('id').errors?.['required']">
                 Please enter an ID.
-            </span>
-            <span i18n *ngIf="userForm.get('id').errors?.['min']">
+            </small>
+            <small class="p-error" i18n *ngIf="userForm.get('id').errors?.['min']">
                 Minimum ID is 1.
-            </span>
+            </small>
         </div>
         <div class="field">
             <label i18n for="email">Email</label>
             <input
+             pInputText
              id="email" 
              type="email" 
-             class="inputfield w-full"
+             class="p-inputtext-sm inputfield w-full"
              formControlName="email"
-             [ngClass]="{'error':userForm.get('email')?.errors}">
-             <span i18n *ngIf="userForm.get('email').errors?.['required']">
+             [ngClass]="{'p-error':userForm.get('email')?.errors}">
+             <small class="p-error" i18n *ngIf="userForm.get('email').errors?.['required']">
                 Please enter an email.
-            </span>
-            <span i18n *ngIf="userForm.get('email').errors?.['email']">
+             </small>
+            <small class="p-error" i18n *ngIf="userForm.get('email').errors?.['email']">
                 Please enter a valid email.
-            </span>
+            </small>
         </div>
         <div class="field">
             <label i18n for="password">Password</label>
             <input 
+            pInputText
             id="password" 
             type="text" 
-            class="inputfield w-full"
+            class="p-inputtext-sm inputfield w-full"
             formControlName="password"
-            [ngClass]="{'error':userForm.get('password')?.errors}">
-            <span i18n *ngIf="userForm.get('password').errors?.['required']">
+            [ngClass]="{'p-error':userForm.get('password')?.errors}">
+            <small class="p-error" i18n *ngIf="userForm.get('password').errors?.['required']">
                 Please enter a password.
-            </span>
+            </small>
         </div>
         <div class="field">
             <label i18n for="role">Role</label>
             <input
+            pInputText
              id="role" 
              type="text" 
-             class="inputfield w-full"
+             class="p-inputtext-sm inputfield w-full"
              formControlName="role"
-             [ngClass]="{'error':userForm.get('role')?.errors}">
-             <span i18n *ngIf="userForm.get('role').errors?.['required']">
+             [ngClass]="{'p-error':userForm.get('role')?.errors}">
+             <small class="p-error" i18n *ngIf="userForm.get('role').errors?.['required']">
                 Please enter a role.
-            </span>
+             </small>
         </div>
         <div class="field">
             <label i18n for="permissions">Permissions</label>
-            <input 
+            <input
+            pInputText 
             id="permissions" 
             type="text" 
-            class="inputfield w-full"
+            class="p-inputtext-sm inputfield w-full"
             formControlName="permissions"
-            [ngClass]="{'error':userForm.get('permissions')?.errors}">
-            <span i18n *ngIf="userForm.get('permissions').errors?.['required']">
+            [ngClass]="{'p-error':userForm.get('permissions')?.errors}">
+            <small class="p-error" i18n *ngIf="userForm.get('permissions').errors?.['required']">
                 Please enter the permissions.
-            </span>
+            </small>
         </div>
     
         <div class="button-list">
@@ -115,7 +121,19 @@
             <p-button 
             styleClass="p-button-sm"
             type="button"
+            (click)="confirmDelete()"
             i18n>Delete</p-button>
         </div>
     </form>
 </div>
+
+<p-dialog i18n-header header="Naigate Away" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <p i18n class="p-m-0">Are you sure you want to navigate away and lose all changes?</p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="modalChoice($event)" i18n-label label="Yes" class="p-button-text"></p-button>
+            <p-button icon="pi pi-times" (click)="modalChoice($event)" i18n-label label="No"></p-button>
+        </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>

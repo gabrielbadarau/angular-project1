@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanDeactivate } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { UserEditComponent } from './user-edit.component';
 
 @Injectable()
 
 export class UserEditGuardService implements CanDeactivate<UserEditComponent> {
 
-  canDeactivate(component: UserEditComponent): boolean {
+  canDeactivate(component: UserEditComponent):Observable<boolean>{
+    component.displayModal=true;
     if(component.userForm.dirty && !component.isUpdating){
-      return confirm(`Navigate away and lose all changes to ${component.user.first_name} ${component.user.last_name}?`)
+      return component.selectAnswerModal$;
     }
-    return true;
+    return of(true);
   }
-
 }

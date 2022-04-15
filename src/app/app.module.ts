@@ -21,12 +21,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     ToastModule,
     TabMenuModule,
     MenuModule,
     SidebarModule,
     ButtonModule,
-    BrowserAnimationsModule,
     RouterModule.forRoot([
       {path:'**',redirectTo:'',pathMatch:'full'}
     ]),

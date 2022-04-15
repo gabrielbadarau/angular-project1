@@ -47,23 +47,28 @@ export class AppComponent implements OnInit {
         }
     ];
 
-    this.usersService.updateUserSuccessChange$.subscribe(
-      value=>{
-        if(value){
-          this.showSuccess();
-        }
-        else{
-          this.showError()
-        }
-      }
-    )
+    this.usersService.updateUserSuccessChange$.subscribe(value=>this.handleUpdateMessage(value))
+
+    this.usersService.updateDeleteUserChange$.subscribe(value=>this.handleDeleteMessage(value));
 
   }
 
-  showSuccess() {
-    this.messageService.add({severity:'success', summary: 'Success', detail: 'User updated'});
+  handleUpdateMessage(value){
+    if(value){
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'User updated'});
+    }
+    else{
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'An error occured while updating user'});
+    }
   }
-  showError() {
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'An error occured while updating user'});
+
+  handleDeleteMessage(value){
+    if(value){
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'User deleted'});
+    }
+    else{
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'An error occured while deleting user'});
+    }
   }
+
 }

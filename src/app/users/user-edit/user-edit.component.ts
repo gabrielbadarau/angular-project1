@@ -1,25 +1,34 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Iusers } from '../users';
 import { UsersService } from '../users.service';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css'],
+  providers: [ConfirmationService]
 })
 export class UserEditComponent implements OnInit {
   
   userForm:FormGroup;
   user:Iusers;
   isUpdating:boolean=false;
+  displayModal: boolean;
+
+  private answerModal= new Subject<boolean>();
+  selectAnswerModal$=this.answerModal.asObservable();
+  
 
   constructor(
     private fb:FormBuilder,
     private route:ActivatedRoute,
     private usersService:UsersService,
     private router:Router,
+    private confirmationService: ConfirmationService,
     ) { }
   
 
@@ -67,7 +76,7 @@ export class UserEditComponent implements OnInit {
       this.usersService.updateUser(this.userForm.value).subscribe({
         next:()=>{
           this.usersService.changeUpdateUserSuccess(true);
-          this.onSaveComplete();
+          this.router.navigate(['/users'])
         },
         error:(error)=>{
           console.log(error)
@@ -76,16 +85,48 @@ export class UserEditComponent implements OnInit {
       })
     }
     else{
-      this.onSaveComplete();
+      this.router.navigate(['/users'])
     }
+  }
+  
+  confirmDelete() {
+    this.confirmationService.confirm({
+        message: 'Do you want to delete this user?',
+        header: 'Delete Confirmation',
+        icon: 'pi pi-info-circle',
+        accept: () => {
+          this.usersService.deleteUser(this.user.id).subscribe({
+            next:()=>{
+              this.usersService.changeUpdateDeleteUser(true);
+              this.router.navigate(['/users']);
+            },
+            error:(error)=>{
+              console.log(error)
+              this.usersService.changeUpdateDeleteUser(false);
+            }
+          })
+        },
+        reject: null
+    });
   }
 
   cancel():void{
     this.router.navigate(['/users'])
   }
 
-  onSaveComplete():void{
-    this.router.navigate(['/users'])
+  changeAnswerModal(value:boolean){
+    this.answerModal.next(value);
+  }
+
+  modalChoice(event):void{
+    this.displayModal=false;
+    if(event.target.innerText==='Yes')
+    {
+      this.changeAnswerModal(true);
+    }
+    else{
+      this.changeAnswerModal(false);
+    }
   }
 
 }
