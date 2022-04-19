@@ -37,6 +37,17 @@
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="561897701456319077" datatype="html">
+        <source>ID: <x id="INTERPOLATION" equiv-text="{{transaction.id}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/transactions/transaction-detail/transaction-detail.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-detail/user-detail.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3973931101896534797" datatype="html">
         <source>Date</source>
         <context-group purpose="location">
@@ -121,8 +132,12 @@
           <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-list/users-list.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5034794475272948360" datatype="html">
@@ -139,8 +154,12 @@
           <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-list/users-list.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="837553826328586238" datatype="html">
@@ -150,18 +169,138 @@
           <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7585826646011739428" datatype="html">
+        <source>Edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-detail/user-detail.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6028371114637047813" datatype="html">
         <source>First Name</source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-list/users-list.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7553476104569358813" datatype="html">
+        <source> Please enter a first name. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">16,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4407559560004943843" datatype="html">
         <source>Last Name</source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-list/users-list.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2516240923512592922" datatype="html">
+        <source> Please enter a last name. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">28,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8040881171107393560" datatype="html">
+        <source>ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4505755912057846910" datatype="html">
+        <source> Please enter an ID. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">40,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2291169793877305186" datatype="html">
+        <source> Minimum ID is 1. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">43,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9076411523715704074" datatype="html">
+        <source> Please enter an email. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">55,57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8634112532047479804" datatype="html">
+        <source> Please enter a valid email. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">58,60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3139646040561767205" datatype="html">
+        <source> Please enter a password. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">70,72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7398002471356160840" datatype="html">
+        <source> Please enter a role. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">82,84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7314814725704332646" datatype="html">
+        <source>Permissions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6901261994007894625" datatype="html">
+        <source> Please enter the permissions. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">94,96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3620188369327429839" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">105,107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7022070615528435141" datatype="html">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
     </body>

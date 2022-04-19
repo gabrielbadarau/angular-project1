@@ -7,12 +7,12 @@ import { AppComponent } from './app.component';
 import { TransactionsModule } from './transactions/transactions.module';
 import { UsersModule } from './users/users.module';
 
+import {ToastModule} from 'primeng/toast';
 import {TabMenuModule} from 'primeng/tabmenu';
 import { MenuModule } from 'primeng/menu';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 @NgModule({
   declarations: [
@@ -21,11 +21,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    ToastModule,
     TabMenuModule,
     MenuModule,
     SidebarModule,
     ButtonModule,
-    BrowserAnimationsModule,
     RouterModule.forRoot([
       {path:'**',redirectTo:'',pathMatch:'full'}
     ]),

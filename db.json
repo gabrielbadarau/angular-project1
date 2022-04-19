@@ -1053,7 +1053,6 @@
       "id": 1005,
       "email": "Mihai_Mihu@gmail.com",
       "password": "rtyfghvbn",
-      "profile_picture": "../../../assets/b5.jpg",
       "role": "User",
       "permissions": "Genin"
     },
@@ -1063,17 +1062,15 @@
       "id": 1006,
       "email": "Anastasia_Mirela@gmail.com",
       "password": "yuihjkbnm",
-      "profile_picture": "../../../assets/b6.jpg",
       "role": "User",
       "permissions": "Genin"
     },
     {
       "first_name": "Catalin",
-      "last_name": "Para",
+      "last_name": "Parad",
       "id": 1007,
       "email": "Catalin_Para@gmail.com",
       "password": "poilkjmnb",
-      "profile_picture": "../../../assets/b7.jpg",
       "role": "User",
       "permissions": "Genin"
     },
@@ -1083,7 +1080,6 @@
       "id": 1009,
       "email": "Norbi_Adams@gmail.com",
       "password": "678yuibub",
-      "profile_picture": "../../../assets/b9.jpg",
       "role": "Designer",
       "permissions": "Chunin"
     },
@@ -1093,7 +1089,6 @@
       "id": 1010,
       "email": "Darius_Berenghi@gmail.com",
       "password": "789456123",
-      "profile_picture": "../../../assets/b10.jpg",
       "role": "UX/UI Specialist",
       "permissions": "Chunin"
     },
@@ -1150,6 +1145,7 @@
     {
       "first_name": "Bella",
       "last_name": "Bucur",
+      "id": 1016,
       "email": "Bella_Bucur@gmail.com",
       "password": "ijn9ij0ok",
       "profile_picture": "../../../assets/b17.jpg",
@@ -1159,6 +1155,7 @@
     {
       "first_name": "Marcus",
       "last_name": "Beregata",
+      "id": 1017,
       "email": "Marcurs_Beregata@gmail.com",
       "password": "lkolkolko",
       "profile_picture": "../../../assets/b18.jpg",
@@ -1168,6 +1165,7 @@
     {
       "first_name": "Ioana",
       "last_name": "Lavinia",
+      "id": 1018,
       "email": "Ioana_Lavinia@gmail.com",
       "password": "asadeccer",
       "profile_picture": "../../../assets/b19.jpg",

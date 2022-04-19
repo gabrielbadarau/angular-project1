@@ -7,7 +7,6 @@
         </h1>
     </div>
 </div> -->
-
 <p-table [value]="users">
     <ng-template pTemplate="header">
         <tr>
@@ -15,14 +14,26 @@
             <th i18n>Last Name</th>
             <th i18n>Email</th>
             <th i18n>Role</th>
+            <th></th>
+            <th></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user>
-            <tr class="row" [routerLink]="['/users',user.id]">
-                <td>{{user.first_name}}</td>
-                <td>{{user.last_name}}</td>
+            <tr class="row">
+                <td class="select" [routerLink]="['/users',user.id]">{{user.first_name}}</td>
+                <td class="select" [routerLink]="['/users',user.id]">{{user.last_name}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.role}}</td>
+                <td >{{user.role}}</td>
+                <td [routerLink]="['/users',user.id,'edit']">
+                    <p-button type="button">Edit</p-button>
+                </td>
+                <td>
+                    <button 
+                    (click)="confirmDelete(user.id)"
+                    pButton icon="pi pi-trash"></button>
+                </td>
             </tr>
     </ng-template>
 </p-table>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
