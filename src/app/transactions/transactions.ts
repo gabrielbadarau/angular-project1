@@ -9,7 +9,7 @@ export interface Itransactions{
     products:Iproducts[],
 }
 
-interface Iproducts{
+export interface Iproducts{
     id:number,
     description:string,
     amount:number,

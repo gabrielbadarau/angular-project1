@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of, Subject, tap } from 'rxjs';
 import { Itransactions } from './transactions';
 import LOCALHOST from '../localhost';
+import { HttpWrapperService } from '../http-wrapper.service';
 
 @Injectable()
 
@@ -10,25 +10,27 @@ export class TransactionsService {
   private transactionsUrl=LOCALHOST+'/transactions';
   private transactions: Itransactions[]=[];
 
-  constructor(private http:HttpClient) { }
+  private updateTransactionSuccessSource=new Subject <boolean>();
+  updateTransactionSuccessChange$=this.updateTransactionSuccessSource.asObservable();
+
+  private updateDeleteTransactionSource=new Subject <boolean>();
+  updateDeleteTransactionChange$=this.updateDeleteTransactionSource.asObservable();
+
+  constructor(private wrappedHttp:HttpWrapperService) { }
+
+  changeUpdateTransactionSuccess(value:boolean){
+    this.updateTransactionSuccessSource.next(value);
+  }
+  changeUpdateDeleteTransaction(value:boolean){
+    this.updateDeleteTransactionSource.next(value);
+  }
 
   getTransactions():Observable<Itransactions[]>{
-
-    if(this.transactions.length){
-      return of(this.transactions)
-    }
-
-    return this.http.get<Itransactions[]>(this.transactionsUrl)
-    .pipe(
-      tap(data=>{
-        console.log(data);
-        this.transactions=data;
-      })
-    )
+    return this.wrappedHttp.get<Itransactions[]>(this.transactionsUrl)
+    .pipe(tap(data=>this.transactions=data))
   }
 
   getId(id:number):Observable<Itransactions>{
-
     if(this.transactions){
       const foundTransaction=this.transactions.find(transaction=>transaction.id===id)
       if(foundTransaction){
@@ -36,12 +38,17 @@ export class TransactionsService {
       }
     }
     const transactionUrl=`${this.transactionsUrl}/${id}`
-    return this.http.get<Itransactions>(transactionUrl)
-    .pipe(
-      tap(data=>{
-          console.log(data);
-        }
-      )
-    )
+    return this.wrappedHttp.get<Itransactions>(transactionUrl)
   }
+
+  updateTransaction(id:number,updatedTransaction:Itransactions):Observable<Itransactions>{
+    const transactionUrl=`${this.transactionsUrl}/${id}`;
+    return this.wrappedHttp.put<Itransactions>(transactionUrl,updatedTransaction)
+  }
+
+  deleteTransaction(id:number):Observable<Itransactions>{
+    const transactionUrl=`${this.transactionsUrl}/${id}`;
+    return this.wrappedHttp.delete<Itransactions>(transactionUrl);
+  }
+
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import {MenuItem, MessageService} from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { TransactionsService } from './transactions/transactions.service';
 import { UsersService } from './users/users.service';
 
 @Component({
@@ -11,17 +13,18 @@ import { UsersService } from './users/users.service';
   providers: [MessageService],
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit,OnDestroy{
+  
   title = 'Project1';
-
   headerItems: MenuItem[] = [];
   sideItems: MenuItem[]=[];
-
   visibleSidebar1:boolean=false;
+  appSubscriptions:Subscription[]=[];
 
   constructor(private primengConfig: PrimeNGConfig,
     private usersService:UsersService,
-    private messageService:MessageService) {}
+    private messageService:MessageService,
+    private transactionsService:TransactionsService) {}
 
   ngOnInit(): void {
 
@@ -47,28 +50,21 @@ export class AppComponent implements OnInit {
         }
     ];
 
-    this.usersService.updateUserSuccessChange$.subscribe(value=>this.handleUpdateMessage(value))
-
-    this.usersService.updateDeleteUserChange$.subscribe(value=>this.handleDeleteMessage(value));
-
+    this.appSubscriptions.push(this.usersService.updateUserSuccessChange$.subscribe(value=>this.handleMessage(value,'user','updated')))
+    this.appSubscriptions.push(this.usersService.updateDeleteUserChange$.subscribe(value=>this.handleMessage(value,'user','deleted')))
+    this.appSubscriptions.push(this.transactionsService.updateTransactionSuccessChange$.subscribe(value=>this.handleMessage(value,'transaction','updated')))
+    this.appSubscriptions.push(this.transactionsService.updateDeleteTransactionChange$.subscribe(value=>this.handleMessage(value,'transaction','deleted')))
   }
 
-  handleUpdateMessage(value){
-    if(value){
-      this.messageService.add({severity:'success', summary: 'Success', detail: 'User updated'});
-    }
-    else{
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'An error occured while updating user'});
-    }
+  ngOnDestroy(): void {
+    this.appSubscriptions.forEach((subscription)=>subscription.unsubscribe());
   }
 
-  handleDeleteMessage(value){
-    if(value){
-      this.messageService.add({severity:'success', summary: 'Success', detail: 'User deleted'});
-    }
-    else{
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'An error occured while deleting user'});
-    }
+  handleMessage(value:boolean,object:string,action:string):void{
+    this.messageService.add({
+      severity: value ? 'success':'error', 
+      summary: value ? 'Success':'Error', 
+      detail: value ? `Operation succesful, ${object} ${action} !` : `Operation failed, the ${object} has not been ${action}. Check the errors.`,
+    })
   }
-
 }
