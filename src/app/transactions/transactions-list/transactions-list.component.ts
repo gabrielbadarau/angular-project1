@@ -44,7 +44,7 @@ export class TransactionsListComponent implements OnInit,OnDestroy {
               this.ngOnInit();
             },
             error:(error)=>{
-              console.log(error)
+              console.error(error)
               this.transactionsService.changeUpdateDeleteTransaction(false);
             }
           }))

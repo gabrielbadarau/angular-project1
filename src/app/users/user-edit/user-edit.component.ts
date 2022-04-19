@@ -48,7 +48,7 @@ export class UserEditComponent implements OnInit,OnDestroy {
     const id=Number(this.route.snapshot.paramMap.get('id'));
     this.userEditSubscriptions.push(this.usersService.getId(id).subscribe({
       next:user=>this.displayUser(user),
-      error:error=>console.log(error)
+      error:error=>console.error(error)
     }))
   }
 
@@ -83,7 +83,7 @@ export class UserEditComponent implements OnInit,OnDestroy {
           this.router.navigate(['/users'])
         },
         error:(error)=>{
-          console.log(error)
+          console.error(error)
           this.usersService.changeUpdateUserSuccess(false);
         }
       }))
@@ -105,7 +105,7 @@ export class UserEditComponent implements OnInit,OnDestroy {
               this.router.navigate(['/users']);
             },
             error:(error)=>{
-              console.log(error)
+              console.error(error)
               this.usersService.changeUpdateDeleteUser(false);
             }
           }))

@@ -50,7 +50,7 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
     const id=Number(this.route.snapshot.paramMap.get('id'));
     this.transactionEditSubscriptions.push(this.transactionsService.getId(id).subscribe({
       next:transaction=>this.displayTransaction(transaction),
-      error:error=>console.log(error)
+      error:error=>console.error(error)
     }))
   }
 
@@ -88,7 +88,7 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
           this.router.navigate(['/transactions'])
         },
         error:(error)=>{
-          console.log(error);
+          console.error(error);
           this.transactionsService.changeUpdateTransactionSuccess(false);
         }
       }))
@@ -110,7 +110,7 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
               this.router.navigate(['/transactions']);
             },
             error:(error)=>{
-              console.log(error)
+              console.error(error)
               this.transactionsService.changeUpdateDeleteTransaction(false);
             }
           }))
