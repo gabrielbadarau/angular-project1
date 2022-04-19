@@ -1,0 +1,215 @@
+<div class="card">
+    <form
+        novalidate
+        [formGroup]="transactionForm"
+        (ngSubmit)="save()"
+    >
+        <div class="field">
+            <label i18n for="date">Date</label>
+            <p-calendar
+                dateFormat="mm.dd.yy"
+                id="date" 
+                formControlName="date"
+                class="block w-full p-inputtext-sm"
+                [showIcon]="true"
+            >
+            </p-calendar>
+            <small class="p-error" i18n *ngIf="transactionForm.get('date').errors?.['required']">
+                Please enter a date.
+            </small>
+        </div>
+        <div class="field">
+            <label i18n for="id">ID</label>
+            <input 
+            pInputText
+            id="id" 
+            type="number" 
+            class="p-inputtext-sm inputfield w-full"
+            formControlName="id"
+            >
+            <small class="p-error" i18n *ngIf="transactionForm.get('id').errors?.['required']">
+                Please enter an ID.
+            </small>
+            <small class="p-error" i18n *ngIf="transactionForm.get('id').errors?.['min']">
+                Minimum ID is 1.
+            </small>
+        </div>
+        <div class="field">
+            <label i18n for="id">Category</label>
+            <input 
+            pInputText
+            id="category" 
+            type="text" 
+            class="p-inputtext-sm inputfield w-full"
+            formControlName="category"
+            >
+            <small class="p-error" i18n *ngIf="transactionForm.get('category').errors?.['required']">
+                Please enter a category.
+            </small>
+        </div>
+        <div class="field">
+            <label i18n for="receiver">Receiver</label>
+            <input
+            pInputText
+            id="receiver" 
+            type="text" 
+            class="p-inputtext-sm inputfield w-full"
+            formControlName="receiver"
+            >
+            <small class="p-error" i18n *ngIf="transactionForm.get('receiver').errors?.['required']">
+                Please enter a receiver.
+            </small>
+        </div>
+        <div class="field">
+            <label i18n for="price">Price</label>
+            <input 
+            pInputText
+            id="price" 
+            type="number" 
+            class="p-inputtext-sm inputfield w-full"
+            formControlName="price"
+            >
+            <small class="p-error" i18n *ngIf="transactionForm.get('price').errors?.['required']">
+                Please enter a price.
+            </small>
+            <small class="p-error" i18n *ngIf="transactionForm.get('price').errors?.['min']">
+                Minimum price is 0.
+            </small>
+        </div>
+        <div class="field">
+            <label i18n for="VAT">VAT</label>
+            <input
+            pInputText
+            id="VAT" 
+            type="number" 
+            class="p-inputtext-sm inputfield w-full"
+            formControlName="VAT"
+            >
+            <small class="p-error" i18n *ngIf="transactionForm.get('VAT').errors?.['required']">
+                Please enter a VAT.
+            </small>
+            <small class="p-error" i18n *ngIf="transactionForm.get('VAT').errors?.['min']">
+                Minimum VAT is 0.
+            </small>
+        </div>
+        <div class="flex flex-row flex-wrap justify-content-start ">
+            <div
+                class="products mr-8"
+                formArrayName="products"
+                *ngFor="let product of products.controls;let i=index"
+            >
+                <h4 class="product-title border-bottom-1">Product #{{i+1}}</h4>
+                <div [formGroupName]="i">
+                    <div class="field">
+                        <label i18n attr.for="{{'description'+i}}">Description</label>
+                        <input 
+                        pInputText
+                        id="{{'description'+i}}" 
+                        type="text" 
+                        class="p-inputtext-sm inputfield w-full"
+                        formControlName="description">
+                        <small class="p-error" i18n *ngIf="transactionForm.get(['products',i]).get('description').errors?.['required']">
+                            Please enter a description.
+                        </small>
+                    </div>
+                    <div class="field">
+                        <label i18n attr.for="{{'id'+i}}">ID</label>
+                        <input 
+                        pInputText
+                        id="{{'id'+i}}" 
+                        type="number" 
+                        class="p-inputtext-sm inputfield w-full"
+                        formControlName="id">
+                        <small class="p-error" i18n *ngIf="transactionForm.get(['products',i]).get('id')?.errors?.['required']">
+                            Please enter an ID.
+                        </small>
+                        <small class="p-error" i18n *ngIf="transactionForm.get(['products',i]).get('id')?.errors?.['min']">
+                            Minimum ID is 1.
+                        </small>
+                    </div>
+                    <div class="field">
+                        <label i18n attr.for="{{'amount'+i}}">Amount</label>
+                        <input 
+                        pInputText
+                        id="{{'amount'+i}}" 
+                        type="number" 
+                        class="p-inputtext-sm inputfield w-full"
+                        formControlName="amount"
+                        >
+                        <small class="p-error" i18n *ngIf="transactionForm.get(['products',i]).get('amount')?.errors?.['required']">
+                            Please enter an amount.
+                        </small>
+                        <small class="p-error" i18n *ngIf="transactionForm.get(['products',i]).get('amount')?.errors?.['min']">
+                            Minimum amount is 1.
+                        </small>
+                    </div>
+                    <div class="field">
+                        <label i18n attr.for="{{'price'+i}}">Price</label>
+                        <input 
+                        pInputText
+                        id="{{'price'+i}}" 
+                        type="number" 
+                        class="p-inputtext-sm inputfield w-full"
+                        formControlName="price"
+                        >
+                        <small class="p-error" i18n *ngIf="transactionForm.get(['products',i]).get('price')?.errors?.['required']">
+                            Please enter a price.
+                        </small>
+                        <small class="p-error" i18n *ngIf="transactionForm.get(['products',i]).get('price')?.errors?.['min']">
+                            Minimum price is 0.
+                        </small>
+                    </div>
+                    <div class="field">
+                        <label i18n attr.for="{{'VAT'+i}}">VAT</label>
+                        <input 
+                        pInputText
+                        id="{{'VAT'+i}}" 
+                        type="number" 
+                        class="p-inputtext-sm inputfield w-full"
+                        formControlName="VAT"
+                        >
+                        <small class="p-error" i18n *ngIf="transactionForm.get(['products',i]).get('VAT')?.errors?.['required']">
+                            Please enter a VAT.
+                        </small>
+                        <small class="p-error" i18n *ngIf="transactionForm.get(['products',i]).get('VAT')?.errors?.['min']">
+                            Minimum VAT is 0.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-3">
+            <p-button 
+            type="submit" 
+            styleClass="p-button-sm"
+            [disabled]="!transactionForm.valid"
+            i18n
+        >
+            Save
+            </p-button>
+
+            <p-button 
+            (click)="cancel()"
+            styleClass="p-button-sm"
+            type="button" 
+            i18n>Cancel</p-button>
+
+            <p-button 
+            styleClass="p-button-sm"
+            type="button"
+            (click)="confirmDelete()"
+            i18n>Delete</p-button>
+        </div>
+    </form>
+</div>
+
+<p-dialog i18n-header header="Naigate Away" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <p i18n class="p-m-0">Are you sure you want to navigate away and lose all changes?</p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="modalChoice($event)" i18n-label label="Yes" class="p-button-text"></p-button>
+            <p-button icon="pi pi-times" (click)="modalChoice($event)" i18n-label label="No"></p-button>
+        </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>

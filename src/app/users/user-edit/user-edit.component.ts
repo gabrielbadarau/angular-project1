@@ -1,7 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Iusers } from '../users';
 import { UsersService } from '../users.service';
 import {ConfirmationService} from 'primeng/api';
@@ -12,12 +12,13 @@ import {ConfirmationService} from 'primeng/api';
   styleUrls: ['./user-edit.component.css'],
   providers: [ConfirmationService]
 })
-export class UserEditComponent implements OnInit {
+export class UserEditComponent implements OnInit,OnDestroy {
   
   userForm:FormGroup;
   user:Iusers;
   isUpdating:boolean=false;
   displayModal: boolean;
+  subscriptions:Subscription[]=[];
 
   private answerModal= new Subject<boolean>();
   selectAnswerModal$=this.answerModal.asObservable();
@@ -45,11 +46,15 @@ export class UserEditComponent implements OnInit {
     })
 
     const id=Number(this.route.snapshot.paramMap.get('id'));
-    this.usersService.getId(id).subscribe({
+    const subscription1=this.usersService.getId(id).subscribe({
       next:user=>this.displayUser(user),
       error:error=>console.log(error)
     })
+    this.subscriptions.push(subscription1);
+  }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription=>subscription.unsubscribe())
   }
 
   displayUser(user:Iusers):void{
@@ -73,7 +78,7 @@ export class UserEditComponent implements OnInit {
     this.isUpdating=true;
 
     if(this.userForm.dirty){
-      this.usersService.updateUser(this.userForm.value).subscribe({
+      const subscription2=this.usersService.updateUser(this.user.id,this.userForm.value).subscribe({
         next:()=>{
           this.usersService.changeUpdateUserSuccess(true);
           this.router.navigate(['/users'])
@@ -83,6 +88,7 @@ export class UserEditComponent implements OnInit {
           this.usersService.changeUpdateUserSuccess(false);
         }
       })
+      this.subscriptions.push(subscription2);
     }
     else{
       this.router.navigate(['/users'])
@@ -95,7 +101,7 @@ export class UserEditComponent implements OnInit {
         header: 'Delete Confirmation',
         icon: 'pi pi-info-circle',
         accept: () => {
-          this.usersService.deleteUser(this.user.id).subscribe({
+          const subscription3=this.usersService.deleteUser(this.user.id).subscribe({
             next:()=>{
               this.usersService.changeUpdateDeleteUser(true);
               this.router.navigate(['/users']);
@@ -105,6 +111,7 @@ export class UserEditComponent implements OnInit {
               this.usersService.changeUpdateDeleteUser(false);
             }
           })
+          this.subscriptions.push(subscription3);
         },
         reject: null
     });
@@ -120,13 +127,7 @@ export class UserEditComponent implements OnInit {
 
   modalChoice(event):void{
     this.displayModal=false;
-    if(event.target.innerText==='Yes')
-    {
-      this.changeAnswerModal(true);
-    }
-    else{
-      this.changeAnswerModal(false);
-    }
+    this.changeAnswerModal(event.target.innerText==="Yes" ? true : false);
   }
 
 }

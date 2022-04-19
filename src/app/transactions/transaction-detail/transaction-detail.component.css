@@ -1,7 +1,10 @@
-.product{
-    width: 100px;
-    height: 50px;
+.product-button{
     margin:5px;
     justify-content: center;
-    font-size:12px;
+    font-size:14px;
 }
+.product-button:enabled:focus{
+    outline: none;
+    box-shadow: none;
+}
+

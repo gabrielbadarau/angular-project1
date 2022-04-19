@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { UserEditComponent } from '../user-edit/user-edit.component';
 import { Iusers } from '../users';
 import { UsersService } from '../users.service';
@@ -11,9 +12,10 @@ import { UsersService } from '../users.service';
   styleUrls: ['./users-list.component.css'],
   providers: [ConfirmationService],
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit,OnDestroy {
 
   users:Iusers[]=[];
+  subscriptions:Subscription[]=[];
 
   constructor(
     private usersService:UsersService,
@@ -21,11 +23,16 @@ export class UsersListComponent implements OnInit {
     private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
-    this.usersService.getUsers().subscribe({
+    const subscription1=this.usersService.getUsers().subscribe({
       next:(users:Iusers[])=>{
         this.users=users;
       },
     })
+    this.subscriptions.push(subscription1);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription=>subscription.unsubscribe());
   }
 
   confirmDelete(id) {
@@ -34,7 +41,7 @@ export class UsersListComponent implements OnInit {
         header: 'Delete Confirmation',
         icon: 'pi pi-info-circle',
         accept: () => {
-          this.usersService.deleteUser(id).subscribe({
+          const subscription2=this.usersService.deleteUser(id).subscribe({
             next:()=>{
               this.usersService.changeUpdateDeleteUser(true);
               this.ngOnInit();
@@ -44,6 +51,7 @@ export class UsersListComponent implements OnInit {
               this.usersService.changeUpdateDeleteUser(false);
             }
           })
+          this.subscriptions.push(subscription2)
         }
     });
   }

@@ -3,21 +3,31 @@
         <ng-template pTemplate="header">
             <tr>
                 <th i18n pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
-                <th i18n pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
                 <th i18n pSortableColumn="receiver">Receiver <p-sortIcon field="receiver"></p-sortIcon></th>
                 <th i18n pSortableColumn="products">No. of products <p-sortIcon field="products"></p-sortIcon></th>
                 <th i18n pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                <th></th>
+                <th></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-transaction>
-            <tr class="row" [routerLink]="['/transactions',transaction.id]">
-                <td>{{transaction.id}}</td>
-                <td>{{transaction.category}}</td>
-                <td>{{transaction.receiver}}</td>
-                <td>{{transaction.products.length}}</td>
-                <td>{{transaction.price | currency: 'RON'}}</td>
+            <tr class="row">
+                <td  [routerLink]="['/transactions',transaction.id]">{{transaction.id}}</td>
+                <td  [routerLink]="['/transactions',transaction.id]">{{transaction.receiver}}</td>
+                <td  [routerLink]="['/transactions',transaction.id]">{{transaction.products.length}}</td>
+                <td  [routerLink]="['/transactions',transaction.id]">{{transaction.price | currency: 'RON'}}</td>
+                <td class="select" [routerLink]="['/transactions',transaction.id,'edit']">
+                    <p-button type="button">Edit</p-button>
+                </td>
+                <td class="select">
+                    <button 
+                    (click)="confirmDelete(transaction.id)"
+                    pButton icon="pi pi-trash"></button>
+                </td>
             </tr>
         </ng-template>
     </p-table>
 </div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
 
