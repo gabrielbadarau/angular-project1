@@ -15,7 +15,7 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
   transaction:Itransactions;
   showProduct:boolean=false;
   currentProductId:number;
-  subscription:Subscription;
+  transactionSubscription:Subscription;
 
   constructor(
     private route:ActivatedRoute,
@@ -25,7 +25,7 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.id=Number(this.route.snapshot.paramMap.get('id'));
-    this.subscription=this.transactionsService.getId(this.id).subscribe({
+    this.transactionSubscription=this.transactionsService.getId(this.id).subscribe({
       next:(transaction:Itransactions)=>{
         this.transaction=transaction;
       }
@@ -33,15 +33,15 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.transactionSubscription.unsubscribe();
   }
 
   toggleShowProduct(id:number):void{
-    if(this.showProduct===false){
+    if(!this.showProduct){
       this.showProduct=true;
       this.currentProductId=id;
     }
-    else if(this.showProduct===true && id===this.currentProductId){
+    else if(this.showProduct && id===this.currentProductId){
       this.showProduct=false;
       this.currentProductId=0;
       this.router.navigate(['/transactions',this.id])

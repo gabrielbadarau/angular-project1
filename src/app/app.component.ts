@@ -19,7 +19,7 @@ export class AppComponent implements OnInit,OnDestroy{
   headerItems: MenuItem[] = [];
   sideItems: MenuItem[]=[];
   visibleSidebar1:boolean=false;
-  subscriptions:Subscription[]=[];
+  appSubscriptions:Subscription[]=[];
 
   constructor(private primengConfig: PrimeNGConfig,
     private usersService:UsersService,
@@ -50,18 +50,14 @@ export class AppComponent implements OnInit,OnDestroy{
         }
     ];
 
-    const subscription1=this.usersService.updateUserSuccessChange$.subscribe(value=>this.handleMessage(value,'user','updated'))
-    this.subscriptions.push(subscription1)
-    const subscription2=this.usersService.updateDeleteUserChange$.subscribe(value=>this.handleMessage(value,'user','deleted'));
-    this.subscriptions.push(subscription2)
-    const subscription3=this.transactionsService.updateTransactionSuccessChange$.subscribe(value=>this.handleMessage(value,'transaction','updated'))
-    this.subscriptions.push(subscription3)
-    const subscription4=this.transactionsService.updateDeleteTransactionChange$.subscribe(value=>this.handleMessage(value,'transaction','deleted'))
-    this.subscriptions.push(subscription4)
+    this.appSubscriptions.push(this.usersService.updateUserSuccessChange$.subscribe(value=>this.handleMessage(value,'user','updated')))
+    this.appSubscriptions.push(this.usersService.updateDeleteUserChange$.subscribe(value=>this.handleMessage(value,'user','deleted')))
+    this.appSubscriptions.push(this.transactionsService.updateTransactionSuccessChange$.subscribe(value=>this.handleMessage(value,'transaction','updated')))
+    this.appSubscriptions.push(this.transactionsService.updateDeleteTransactionChange$.subscribe(value=>this.handleMessage(value,'transaction','deleted')))
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription)=>subscription.unsubscribe());
+    this.appSubscriptions.forEach((subscription)=>subscription.unsubscribe());
   }
 
   handleMessage(value:boolean,object:string,action:string):void{

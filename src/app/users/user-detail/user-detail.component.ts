@@ -13,7 +13,7 @@ export class UserDetailComponent implements OnInit,OnDestroy {
 
   id:number | undefined;
   user:Iusers | undefined;
-  subscription:Subscription;
+  userSubscription:Subscription;
 
   constructor(
     private route:ActivatedRoute,
@@ -23,7 +23,7 @@ export class UserDetailComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.id=Number(this.route.snapshot.paramMap.get('id'));
 
-    this.subscription=this.userService.getId(this.id).subscribe({
+    this.userSubscription=this.userService.getId(this.id).subscribe({
       next: (user:Iusers)=>{
         this.user=user;
       }
@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
 }

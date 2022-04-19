@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class TransactionsListComponent implements OnInit,OnDestroy {
 
   transactions:Itransactions[]=[];
-  subscriptions:Subscription[]=[];
+  transactionsSubscriptions:Subscription[]=[];
 
   constructor(
     private transactionsService:TransactionsService,
@@ -21,16 +21,15 @@ export class TransactionsListComponent implements OnInit,OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    const subscription1=this.transactionsService.getTransactions().subscribe({
+    this.transactionsSubscriptions.push(this.transactionsService.getTransactions().subscribe({
       next:(transactions:Itransactions[])=>{
         this.transactions=transactions;
       }
-    })
-    this.subscriptions.push(subscription1);
+    }))
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription=>subscription.unsubscribe());
+    this.transactionsSubscriptions.forEach(subscription=>subscription.unsubscribe());
   }
 
   confirmDelete(id) {
@@ -39,7 +38,7 @@ export class TransactionsListComponent implements OnInit,OnDestroy {
         header: 'Delete Confirmation',
         icon: 'pi pi-info-circle',
         accept: () => {
-          const subscription2=this.transactionsService.deleteTransaction(id).subscribe({
+          this.transactionsSubscriptions.push(this.transactionsService.deleteTransaction(id).subscribe({
             next:()=>{
               this.transactionsService.changeUpdateDeleteTransaction(true);
               this.ngOnInit();
@@ -48,8 +47,7 @@ export class TransactionsListComponent implements OnInit,OnDestroy {
               console.log(error)
               this.transactionsService.changeUpdateDeleteTransaction(false);
             }
-          })
-          this.subscriptions.push(subscription2);
+          }))
         },
         reject: null
     });

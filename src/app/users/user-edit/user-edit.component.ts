@@ -18,7 +18,7 @@ export class UserEditComponent implements OnInit,OnDestroy {
   user:Iusers;
   isUpdating:boolean=false;
   displayModal: boolean;
-  subscriptions:Subscription[]=[];
+  userEditSubscriptions:Subscription[]=[];
 
   private answerModal= new Subject<boolean>();
   selectAnswerModal$=this.answerModal.asObservable();
@@ -46,15 +46,14 @@ export class UserEditComponent implements OnInit,OnDestroy {
     })
 
     const id=Number(this.route.snapshot.paramMap.get('id'));
-    const subscription1=this.usersService.getId(id).subscribe({
+    this.userEditSubscriptions.push(this.usersService.getId(id).subscribe({
       next:user=>this.displayUser(user),
       error:error=>console.log(error)
-    })
-    this.subscriptions.push(subscription1);
+    }))
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription=>subscription.unsubscribe())
+    this.userEditSubscriptions.forEach(subscription=>subscription.unsubscribe())
   }
 
   displayUser(user:Iusers):void{
@@ -78,7 +77,7 @@ export class UserEditComponent implements OnInit,OnDestroy {
     this.isUpdating=true;
 
     if(this.userForm.dirty){
-      const subscription2=this.usersService.updateUser(this.user.id,this.userForm.value).subscribe({
+      this.userEditSubscriptions.push(this.usersService.updateUser(this.user.id,this.userForm.value).subscribe({
         next:()=>{
           this.usersService.changeUpdateUserSuccess(true);
           this.router.navigate(['/users'])
@@ -87,8 +86,7 @@ export class UserEditComponent implements OnInit,OnDestroy {
           console.log(error)
           this.usersService.changeUpdateUserSuccess(false);
         }
-      })
-      this.subscriptions.push(subscription2);
+      }))
     }
     else{
       this.router.navigate(['/users'])
@@ -101,7 +99,7 @@ export class UserEditComponent implements OnInit,OnDestroy {
         header: 'Delete Confirmation',
         icon: 'pi pi-info-circle',
         accept: () => {
-          const subscription3=this.usersService.deleteUser(this.user.id).subscribe({
+          this.userEditSubscriptions.push(this.usersService.deleteUser(this.user.id).subscribe({
             next:()=>{
               this.usersService.changeUpdateDeleteUser(true);
               this.router.navigate(['/users']);
@@ -110,8 +108,7 @@ export class UserEditComponent implements OnInit,OnDestroy {
               console.log(error)
               this.usersService.changeUpdateDeleteUser(false);
             }
-          })
-          this.subscriptions.push(subscription3);
+          }))
         },
         reject: null
     });

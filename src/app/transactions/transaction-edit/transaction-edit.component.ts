@@ -18,7 +18,7 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
   transaction:Itransactions;
   isUpdating:boolean=false;
   displayModal:boolean;
-  subscriptions:Subscription[]=[];
+  transactionEditSubscriptions:Subscription[]=[];
 
   private answerModal=new Subject<boolean>();
   selectAnswerModal$=this.answerModal.asObservable();
@@ -48,15 +48,14 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
     })
 
     const id=Number(this.route.snapshot.paramMap.get('id'));
-    const subscription1=this.transactionsService.getId(id).subscribe({
+    this.transactionEditSubscriptions.push(this.transactionsService.getId(id).subscribe({
       next:transaction=>this.displayTransaction(transaction),
       error:error=>console.log(error)
-    })
-    this.subscriptions.push(subscription1);
+    }))
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription)=>subscription.unsubscribe());
+    this.transactionEditSubscriptions.forEach((subscription)=>subscription.unsubscribe());
   }
 
   displayTransaction(transaction:Itransactions):void{
@@ -83,7 +82,7 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
     this.isUpdating=true;
 
     if(this.transactionForm.dirty){
-      const subscription2=this.transactionsService.updateTransaction(this.transaction.id,this.transactionForm.value).subscribe({
+      this.transactionEditSubscriptions.push(this.transactionsService.updateTransaction(this.transaction.id,this.transactionForm.value).subscribe({
         next:()=>{
           this.transactionsService.changeUpdateTransactionSuccess(true);
           this.router.navigate(['/transactions'])
@@ -92,8 +91,7 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
           console.log(error);
           this.transactionsService.changeUpdateTransactionSuccess(false);
         }
-      })
-      this.subscriptions.push(subscription2);
+      }))
     }
     else{
       this.router.navigate(['/transactions']);
@@ -106,7 +104,7 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
         header: 'Delete Confirmation',
         icon: 'pi pi-info-circle',
         accept: () => {
-          const subscription3=this.transactionsService.deleteTransaction(this.transaction.id).subscribe({
+          this.transactionEditSubscriptions.push(this.transactionsService.deleteTransaction(this.transaction.id).subscribe({
             next:()=>{
               this.transactionsService.changeUpdateDeleteTransaction(true);
               this.router.navigate(['/transactions']);
@@ -115,8 +113,7 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
               console.log(error)
               this.transactionsService.changeUpdateDeleteTransaction(false);
             }
-          })
-          this.subscriptions.push(subscription3);
+          }))
         },
         reject: null
     });

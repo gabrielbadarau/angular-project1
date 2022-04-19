@@ -15,7 +15,7 @@ export class ProductDetailComponent implements OnInit,OnDestroy {
   productId:number;
   products:Iproducts[];
   product:Iproducts;
-  subscription:Subscription;
+  productSubscription:Subscription;
 
   constructor(
     private route:ActivatedRoute,
@@ -23,9 +23,8 @@ export class ProductDetailComponent implements OnInit,OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    console.log("I initialize")
     this.transactionId=this.route.snapshot.parent.params['id'];
-    this.subscription=this.transactionsService.getId(this.transactionId).subscribe({
+    this.productSubscription=this.transactionsService.getId(this.transactionId).subscribe({
       next:(transaction)=>{
         this.products=transaction.products
         this.route.paramMap.subscribe(
@@ -39,12 +38,11 @@ export class ProductDetailComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.productSubscription.unsubscribe();
   }
 
   findProduct(id:number):void{
     this.product=this.products.find(product=>product.id===id)
-    console.log(this.product)
   }
   
 }
