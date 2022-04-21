@@ -80,7 +80,10 @@ export class TransactionEditComponent implements OnInit,OnDestroy {
 
   save():void{
     this.isUpdating=true;
-
+    
+    // below, we transform the date from the calendar picker to string so that could fit in our database
+    this.transactionForm.value.date=`${this.transactionForm.value.date.getMonth()+1<10 ? '0'+(this.transactionForm.value.date.getMonth()+1): this.transactionForm.value.date.getMonth()+1}.${this.transactionForm.value.date.getDate()<10 ? '0'+this.transactionForm.value.date.getDate() : this.transactionForm.value.date.getDate()}.${this.transactionForm.value.date.getFullYear()}`
+    
     if(this.transactionForm.dirty){
       this.transactionEditSubscriptions.push(this.transactionsService.updateTransaction(this.transaction.id,this.transactionForm.value).subscribe({
         next:()=>{
