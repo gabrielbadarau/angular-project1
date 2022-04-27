@@ -8,9 +8,8 @@ describe('CustomPickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CustomPickerComponent ]
-    })
-    .compileComponents();
+      declarations: [CustomPickerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

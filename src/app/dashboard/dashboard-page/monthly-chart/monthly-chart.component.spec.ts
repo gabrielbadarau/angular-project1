@@ -8,9 +8,8 @@ describe('MonthlyChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MonthlyChartComponent ]
-    })
-    .compileComponents();
+      declarations: [MonthlyChartComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

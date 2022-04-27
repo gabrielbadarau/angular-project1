@@ -1,46 +1,47 @@
 [
-    {
-      "id":1,
-      "dateOfTransaction": "05-04-2022",
-      "dateOfPayment": "06-04-2022",
-      "ammount": 32.98,
-      "currency":"ron",
-      "code": "034234325",
-      "description": "Plata la POS Banca Transilvania"
-    },
-    {   "id":2,
-        "dateOfTransaction": "05-04-2022",
-        "dateOfPayment": "06-04-2022",
-        "ammount": 32.98,
-        "currency":"ron",
-        "code": "034234325",
-        "description": "Plata la POS MegaImage"
-      },
-      {
-        "id":3,
-        "dateOfTransaction": "05-04-2022",
-        "dateOfPayment": "06-04-2022",
-        "ammount": 32.98,
-        "currency":"ron",
-        "code": "034234325",
-        "description": "Plata la POS Lidl"
-      },
-      {
-        "id":4,
-        "dateOfTransaction": "05-04-2022",
-        "dateOfPayment": "06-04-2022",
-        "ammount": 32.98,
-        "currency":"ron",
-        "code": "034234325",
-        "description": "Plata la POS Kaufland"
-      },
-      {
-        "id":5,
-        "dateOfTransaction": "05-04-2022",
-        "dateOfPayment": "06-04-2022",
-        "ammount": 32.98,
-        "currency":"ron",
-        "code": "034234325",
-        "description": "Plata la POS Dedeman"
-      }
+  {
+    "id": 1,
+    "dateOfTransaction": "05-04-2022",
+    "dateOfPayment": "06-04-2022",
+    "ammount": 32.98,
+    "currency": "ron",
+    "code": "034234325",
+    "description": "Plata la POS Banca Transilvania"
+  },
+  {
+    "id": 2,
+    "dateOfTransaction": "05-04-2022",
+    "dateOfPayment": "06-04-2022",
+    "ammount": 32.98,
+    "currency": "ron",
+    "code": "034234325",
+    "description": "Plata la POS MegaImage"
+  },
+  {
+    "id": 3,
+    "dateOfTransaction": "05-04-2022",
+    "dateOfPayment": "06-04-2022",
+    "ammount": 32.98,
+    "currency": "ron",
+    "code": "034234325",
+    "description": "Plata la POS Lidl"
+  },
+  {
+    "id": 4,
+    "dateOfTransaction": "05-04-2022",
+    "dateOfPayment": "06-04-2022",
+    "ammount": 32.98,
+    "currency": "ron",
+    "code": "034234325",
+    "description": "Plata la POS Kaufland"
+  },
+  {
+    "id": 5,
+    "dateOfTransaction": "05-04-2022",
+    "dateOfPayment": "06-04-2022",
+    "ammount": 32.98,
+    "currency": "ron",
+    "code": "034234325",
+    "description": "Plata la POS Dedeman"
+  }
 ]

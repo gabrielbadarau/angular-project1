@@ -29,7 +29,7 @@
     },
     {
       "id": 100002,
-      "date": "04.19.2022",
+      "date": "02.07.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 1500,
@@ -37,8 +37,8 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1021,
           "description": "Lenovo Laptop",
+          "id": 1021,
           "amount": 1,
           "price": 1500,
           "VAT": 5,
@@ -226,7 +226,7 @@
     },
     {
       "id": 100009,
-      "date": "04.03.2022",
+      "date": "04.24.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 25,
@@ -234,16 +234,16 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1639,
           "description": "Teddy Bears",
+          "id": 1639,
           "amount": 3,
           "price": 5,
           "VAT": 5,
           "total_price": 0
         },
         {
-          "id": 1852,
           "description": "Bunny",
+          "id": 1852,
           "amount": 1,
           "price": 10,
           "VAT": 5,

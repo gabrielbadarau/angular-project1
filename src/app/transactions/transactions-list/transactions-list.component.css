@@ -1,6 +1,6 @@
-.row{
-    cursor: pointer;
+.row {
+  cursor: pointer;
 }
-.row:hover{
-    background-color: lightgray;
+.row:hover {
+  background-color: lightgray;
 }

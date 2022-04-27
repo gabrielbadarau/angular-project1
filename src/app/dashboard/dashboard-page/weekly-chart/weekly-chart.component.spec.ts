@@ -8,9 +8,8 @@ describe('WeeklyChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WeeklyChartComponent ]
-    })
-    .compileComponents();
+      declarations: [WeeklyChartComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

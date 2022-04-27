@@ -7,10 +7,11 @@ import { DashboardService } from './dashboard.service';
 import { MonthlyChartComponent } from './dashboard-page/monthly-chart/monthly-chart.component';
 import { YearlyChartComponent } from './dashboard-page/yearly-chart/yearly-chart.component';
 import { CustomPickerComponent } from './dashboard-page/custom-picker/custom-picker.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpWrapperService } from '../http-wrapper.service';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ReactiveFormsModule,
   ],
-  providers:[
-    DashboardService
-  ]
+  providers: [DashboardService, HttpWrapperService],
 })
-export class DashboardModule { }
+export class DashboardModule {}
