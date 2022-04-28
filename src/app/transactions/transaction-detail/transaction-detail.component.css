@@ -1,10 +1,9 @@
-.product-button{
-    margin:5px;
-    justify-content: center;
-    font-size:14px;
+.product-button {
+  margin: 5px;
+  justify-content: center;
+  font-size: 14px;
 }
-.product-button:enabled:focus{
-    outline: none;
-    box-shadow: none;
+.product-button:enabled:focus {
+  outline: none;
+  box-shadow: none;
 }
-

@@ -9,18 +9,15 @@ import { UserEditGuardService } from './user-edit/user-edit-guard.service';
 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { UsersService } from './users.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputTextModule } from "primeng/inputtext";
+import { InputTextModule } from 'primeng/inputtext';
+import { HttpWrapperService } from '../http-wrapper.service';
 
 @NgModule({
-  declarations: [
-    UsersListComponent,
-    UserDetailComponent,
-    UserEditComponent,
-  ],
+  declarations: [UsersListComponent, UserDetailComponent, UserEditComponent],
   imports: [
     ReactiveFormsModule,
     CommonModule,
@@ -30,16 +27,11 @@ import { InputTextModule } from "primeng/inputtext";
     ButtonModule,
     InputTextModule,
     RouterModule.forChild([
-      {path:'users', component:UsersListComponent},
-      {path:'users/:id', component:UserDetailComponent},
-      {path:'users/:id/edit',
-      canDeactivate:[UserEditGuardService],
-      component:UserEditComponent}
-    ])
+      { path: 'users', component: UsersListComponent },
+      { path: 'users/:id', component: UserDetailComponent },
+      { path: 'users/:id/edit', canDeactivate: [UserEditGuardService], component: UserEditComponent },
+    ]),
   ],
-  providers:[
-    UsersService,
-    UserEditGuardService
-  ]
+  providers: [HttpWrapperService, UsersService, UserEditGuardService],
 })
-export class UsersModule { }
+export class UsersModule {}

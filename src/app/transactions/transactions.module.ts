@@ -6,9 +6,9 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
 
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import {CalendarModule} from 'primeng/calendar';
-import {TableModule} from 'primeng/table';
-import { InputTextModule } from "primeng/inputtext";
+import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TransactionsService } from './transactions.service';
 import { ProductDetailComponent } from './transaction-detail/product-detail/product-detail.component';
@@ -34,22 +34,19 @@ import { HttpWrapperService } from '../http-wrapper.service';
     CalendarModule,
     InputTextModule,
     RouterModule.forChild([
-      {path:'transactions/:id/edit',
-      canDeactivate:[TransactionEditGuardService],
-      component:TransactionEditComponent,
-    },
-      {path:'transactions/:id', 
-      component:TransactionDetailComponent,
-      children:[
-        {path:'product/:id',component:ProductDetailComponent}
-      ]},
-      {path:'transactions', component:TransactionsListComponent},
-    ])
+      {
+        path: 'transactions/:id/edit',
+        canDeactivate: [TransactionEditGuardService],
+        component: TransactionEditComponent,
+      },
+      {
+        path: 'transactions/:id',
+        component: TransactionDetailComponent,
+        children: [{ path: 'product/:id', component: ProductDetailComponent }],
+      },
+      { path: 'transactions', component: TransactionsListComponent },
+    ]),
   ],
-  providers:[
-    HttpWrapperService,
-    TransactionsService,
-    TransactionEditGuardService
-  ]
+  providers: [HttpWrapperService, TransactionsService, TransactionEditGuardService],
 })
-export class TransactionsModule { }
+export class TransactionsModule {}

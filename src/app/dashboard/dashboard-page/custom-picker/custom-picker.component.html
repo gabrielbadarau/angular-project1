@@ -1,0 +1,22 @@
+<div class="pb-2 flex flex-row flex-wrap align-items-center">
+  <mat-form-field color="accent" appearance="fill">
+    <mat-label i18n>Pick a date range</mat-label>
+    <mat-date-range-input [formGroup]="rangeForm" [max]="tommorow" [rangePicker]="picker">
+      <input (dateChange)="onChangeStartDate($event)" matStartDate formControlName="start" placeholder="Start date" />
+      <input (dateChange)="onChangeEndDate($event)" matEndDate formControlName="end" placeholder="End date" />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+
+    <mat-error i18n *ngIf="rangeForm.controls['start'].hasError('matStartDateInvalid')">Invalid start date</mat-error>
+    <mat-error i18n *ngIf="rangeForm.controls['end'].hasError('matEndDateInvalid')">Invalid end date</mat-error>
+  </mat-form-field>
+  <div class="chart">
+    <div>
+      <div style="display: block">
+        <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="lineChartType" [legend]="true">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

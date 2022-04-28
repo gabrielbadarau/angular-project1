@@ -4,14 +4,12 @@ import { Observable, of } from 'rxjs';
 import { TransactionEditComponent } from './transaction-edit.component';
 
 @Injectable()
-
 export class TransactionEditGuardService implements CanDeactivate<TransactionEditComponent> {
   canDeactivate(component: TransactionEditComponent): Observable<boolean> {
-    component.displayModal=true;
-    if(component.transactionForm.dirty && !component.isUpdating){
+    component.displayModal = true;
+    if (component.transactionForm.dirty && !component.isUpdating) {
       return component.selectAnswerModal$;
     }
-    return of(true)
+    return of(true);
   }
-  
 }

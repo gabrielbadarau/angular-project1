@@ -7,31 +7,26 @@ import { UsersService } from '../users.service';
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  styleUrls: ['./user-detail.component.css'],
 })
-export class UserDetailComponent implements OnInit,OnDestroy {
+export class UserDetailComponent implements OnInit, OnDestroy {
+  id: number | undefined;
+  user: Iusers | undefined;
+  userSubscription: Subscription;
 
-  id:number | undefined;
-  user:Iusers | undefined;
-  userSubscription:Subscription;
-
-  constructor(
-    private route:ActivatedRoute,
-    private userService:UsersService,
-    ) { }
+  constructor(private route: ActivatedRoute, private userService: UsersService) {}
 
   ngOnInit(): void {
-    this.id=Number(this.route.snapshot.paramMap.get('id'));
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.userSubscription=this.userService.getId(this.id).subscribe({
-      next: (user:Iusers)=>{
-        this.user=user;
-      }
-    })
+    this.userSubscription = this.userService.getId(this.id).subscribe({
+      next: (user: Iusers) => {
+        this.user = user;
+      },
+    });
   }
 
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
   }
-
 }

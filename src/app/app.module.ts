@@ -7,17 +7,17 @@ import { AppComponent } from './app.component';
 import { TransactionsModule } from './transactions/transactions.module';
 import { UsersModule } from './users/users.module';
 
-import {ToastModule} from 'primeng/toast';
-import {TabMenuModule} from 'primeng/tabmenu';
+import { ToastModule } from 'primeng/toast';
+import { TabMenuModule } from 'primeng/tabmenu';
 import { MenuModule } from 'primeng/menu';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { DashboardPageComponent } from './dashboard/dashboard-page/dashboard-page.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -28,12 +28,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SidebarModule,
     ButtonModule,
     RouterModule.forRoot([
-      {path:'**',redirectTo:'',pathMatch:'full'}
+      { path: 'dashboard', component: DashboardPageComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
     ]),
     UsersModule,
-    TransactionsModule
+    TransactionsModule,
+    DashboardModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

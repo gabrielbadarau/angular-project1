@@ -2,7 +2,7 @@
   "transactions": [
     {
       "id": 100001,
-      "date": "10.10.2021",
+      "date": "12.16.2021",
       "category": "expenses",
       "receiver": "emag",
       "price": 600,
@@ -10,16 +10,16 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1001,
           "description": "RTX 3080",
+          "id": 1001,
           "amount": 1,
           "price": 1500,
           "VAT": 10,
           "total_price": 0
         },
         {
-          "id": 2001,
           "description": "RTX 3070Ti",
+          "id": 2001,
           "amount": 1,
           "price": 1000,
           "VAT": 10,
@@ -29,7 +29,7 @@
     },
     {
       "id": 100002,
-      "date": "09.11.2021",
+      "date": "02.07.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 1500,
@@ -37,8 +37,8 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1021,
           "description": "Lenovo Laptop",
+          "id": 1021,
           "amount": 1,
           "price": 1500,
           "VAT": 5,
@@ -48,7 +48,7 @@
     },
     {
       "id": 100003,
-      "date": "06.02.2021",
+      "date": "04.19.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 300,
@@ -56,8 +56,8 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1234,
           "description": "Office Chair",
+          "id": 1234,
           "amount": 3,
           "price": 100,
           "VAT": 10,
@@ -67,7 +67,7 @@
     },
     {
       "id": 100004,
-      "date": "06.03.2021",
+      "date": "04.18.2022",
       "category": "income",
       "receiver": "emag",
       "price": 300,
@@ -75,8 +75,8 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1234,
           "description": "Office Chair",
+          "id": 1234,
           "amount": 3,
           "price": 100,
           "VAT": 10,
@@ -86,7 +86,7 @@
     },
     {
       "id": 100005,
-      "date": "04.18.2021",
+      "date": "03.10.2021",
       "category": "expenses",
       "receiver": "B&B",
       "price": 50,
@@ -94,8 +94,8 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1366,
           "description": "Watch Fossil",
+          "id": 1366,
           "amount": 1,
           "price": 50,
           "VAT": 5,
@@ -105,7 +105,7 @@
     },
     {
       "id": 100006,
-      "date": "05.18.2021",
+      "date": "05.18.2022",
       "category": "expenses",
       "receiver": "Elefant",
       "price": 700,
@@ -172,7 +172,7 @@
     },
     {
       "id": 100007,
-      "date": "05.18.2021",
+      "date": "05.18.2022",
       "category": "expenses",
       "receiver": "Elefant",
       "price": 350,
@@ -207,7 +207,7 @@
     },
     {
       "id": 100008,
-      "date": "08.29.2021",
+      "date": "08.29.2022",
       "category": "expenses",
       "receiver": "PC Garage",
       "price": 3000,
@@ -226,7 +226,7 @@
     },
     {
       "id": 100009,
-      "date": "04.03.2021",
+      "date": "04.24.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 25,
@@ -234,16 +234,16 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1639,
           "description": "Teddy Bears",
+          "id": 1639,
           "amount": 3,
           "price": 5,
           "VAT": 5,
           "total_price": 0
         },
         {
-          "id": 1852,
           "description": "Bunny",
+          "id": 1852,
           "amount": 1,
           "price": 10,
           "VAT": 5,
@@ -253,7 +253,7 @@
     },
     {
       "id": 100010,
-      "date": "07.13.2021",
+      "date": "07.13.2022",
       "category": "expenses",
       "receiver": "Police",
       "price": 250,
@@ -272,7 +272,7 @@
     },
     {
       "id": 100011,
-      "date": "10.30.2021",
+      "date": "04.17.2022",
       "category": "expenses",
       "receiver": "Zara",
       "price": 100,
@@ -280,16 +280,16 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1632,
           "description": "Shirt Red",
+          "id": 1632,
           "amount": 1,
           "price": 60,
           "VAT": 5,
           "total_price": 0
         },
         {
-          "id": 1478,
           "description": "Shirt Black",
+          "id": 1478,
           "amount": 1,
           "price": 40,
           "VAT": 5,
@@ -299,7 +299,7 @@
     },
     {
       "id": 100012,
-      "date": "11.08.2021",
+      "date": "11.08.2022",
       "category": "expenses",
       "receiver": "Zara Home",
       "price": 575,
@@ -318,7 +318,7 @@
     },
     {
       "id": 100013,
-      "date": "07.16.2021",
+      "date": "07.16.2022",
       "category": "income",
       "receiver": "Police",
       "price": 250,
@@ -337,7 +337,7 @@
     },
     {
       "id": 100014,
-      "date": "01.01.2021",
+      "date": "01.01.2022",
       "category": "expenses",
       "receiver": "Adobe",
       "price": 150,
@@ -356,7 +356,7 @@
     },
     {
       "id": 100015,
-      "date": "01.10.2021",
+      "date": "01.10.2022",
       "category": "expenses",
       "receiver": "AVstore",
       "price": 750,
@@ -391,7 +391,7 @@
     },
     {
       "id": 100016,
-      "date": "02.09.2021",
+      "date": "04.19.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 60,
@@ -399,8 +399,8 @@
       "total_price": 0,
       "products": [
         {
-          "id": 1596,
           "description": "Roses",
+          "id": 1596,
           "amount": 1,
           "price": 60,
           "VAT": 5,
@@ -410,7 +410,7 @@
     },
     {
       "id": 100017,
-      "date": "02.26.2021",
+      "date": "02.26.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 10,
@@ -429,7 +429,7 @@
     },
     {
       "id": 100018,
-      "date": "03.08.2021",
+      "date": "03.08.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 65,
@@ -448,7 +448,7 @@
     },
     {
       "id": 100019,
-      "date": "03.20.2021",
+      "date": "03.20.2022",
       "category": "expenses",
       "receiver": "PCgarage",
       "price": 500,
@@ -467,7 +467,7 @@
     },
     {
       "id": 100020,
-      "date": "04.04.2021",
+      "date": "04.04.2022",
       "category": "expenses",
       "receiver": "Altex",
       "price": 175,
@@ -486,7 +486,7 @@
     },
     {
       "id": 100021,
-      "date": "04.23.2021",
+      "date": "04.23.2022",
       "category": "expenses",
       "receiver": "Altex",
       "price": 250,
@@ -505,7 +505,7 @@
     },
     {
       "id": 100022,
-      "date": "04.25.2021",
+      "date": "04.25.2022",
       "category": "expenses",
       "receiver": "Sportisimo",
       "price": 600,
@@ -540,7 +540,7 @@
     },
     {
       "id": 100023,
-      "date": "05.01.2021",
+      "date": "05.01.2022",
       "category": "expenses",
       "receiver": "Altex",
       "price": 250,
@@ -567,7 +567,7 @@
     },
     {
       "id": 100024,
-      "date": "05.06.2021",
+      "date": "05.06.2022",
       "category": "income",
       "receiver": "emag",
       "price": 500,
@@ -586,7 +586,7 @@
     },
     {
       "id": 100025,
-      "date": "05.15.2021",
+      "date": "05.15.2022",
       "category": "expenses",
       "receiver": "PCgarage",
       "price": 630,
@@ -605,7 +605,7 @@
     },
     {
       "id": 100026,
-      "date": "05.20.2021",
+      "date": "05.20.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 2500,
@@ -624,7 +624,7 @@
     },
     {
       "id": 100027,
-      "date": "05.26.2021",
+      "date": "04.16.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 950,
@@ -632,8 +632,8 @@
       "total_price": 0,
       "products": [
         {
-          "id": 3699,
           "description": "RTX 3050",
+          "id": 3699,
           "amount": 1,
           "price": 950,
           "VAT": 10,
@@ -643,7 +643,7 @@
     },
     {
       "id": 100028,
-      "date": "06.06.2021",
+      "date": "06.06.2022",
       "category": "expenses",
       "receiver": "Zara",
       "price": 800,
@@ -670,7 +670,7 @@
     },
     {
       "id": 100029,
-      "date": "06.09.2021",
+      "date": "06.09.2022",
       "category": "expenses",
       "receiver": "Zara",
       "price": 200,
@@ -689,7 +689,7 @@
     },
     {
       "id": 100030,
-      "date": "06.10.2021",
+      "date": "06.10.2022",
       "category": "expenses",
       "receiver": "Sportisimo",
       "price": 290,
@@ -708,7 +708,7 @@
     },
     {
       "id": 100031,
-      "date": "07.07.2021",
+      "date": "04.19.2022",
       "category": "expenses",
       "receiver": "Zara",
       "price": 660,
@@ -716,8 +716,8 @@
       "total_price": 0,
       "products": [
         {
-          "id": 3336,
           "description": "Skirts",
+          "id": 3336,
           "amount": 6,
           "price": 110,
           "VAT": 10,
@@ -727,7 +727,7 @@
     },
     {
       "id": 100032,
-      "date": "07.16.2021",
+      "date": "07.16.2022",
       "category": "expenses",
       "receiver": "Altex",
       "price": 565,
@@ -746,7 +746,7 @@
     },
     {
       "id": 100033,
-      "date": "07.18.2021",
+      "date": "07.18.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 50,
@@ -765,7 +765,7 @@
     },
     {
       "id": 100034,
-      "date": "08.21.2021",
+      "date": "08.21.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 25,
@@ -784,7 +784,7 @@
     },
     {
       "id": 100035,
-      "date": "08.22.2021",
+      "date": "08.22.2022",
       "category": "income",
       "receiver": "emag",
       "price": 25,
@@ -803,7 +803,7 @@
     },
     {
       "id": 100036,
-      "date": "07.17.2021",
+      "date": "07.17.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 70,
@@ -822,7 +822,7 @@
     },
     {
       "id": 100037,
-      "date": "07.09.2021",
+      "date": "07.09.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 800,
@@ -841,7 +841,7 @@
     },
     {
       "id": 100038,
-      "date": "07.03.2021",
+      "date": "07.03.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 300,
@@ -860,7 +860,7 @@
     },
     {
       "id": 100039,
-      "date": "06.28.2021",
+      "date": "06.28.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 180,
@@ -879,7 +879,7 @@
     },
     {
       "id": 100040,
-      "date": "06.27.2021",
+      "date": "06.27.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 400,
@@ -898,7 +898,7 @@
     },
     {
       "id": 100041,
-      "date": "06.25.2021",
+      "date": "06.25.2022",
       "category": "expenses",
       "receiver": "Altex",
       "price": 420,
@@ -917,7 +917,7 @@
     },
     {
       "id": 100042,
-      "date": "03.20.2021",
+      "date": "03.20.2022",
       "category": "expenses",
       "receiver": "Sportisimo",
       "price": 85,
@@ -936,7 +936,7 @@
     },
     {
       "id": 100043,
-      "date": "04.15.2021",
+      "date": "04.15.2022",
       "category": "expenses",
       "receiver": "Sportisimo",
       "price": 325,
@@ -963,7 +963,7 @@
     },
     {
       "id": 100044,
-      "date": "02.17.2021",
+      "date": "02.17.2022",
       "category": "expenses",
       "receiver": "emag",
       "price": 125,
@@ -982,7 +982,7 @@
     },
     {
       "id": 100045,
-      "date": "01.22.2021",
+      "date": "01.22.2022",
       "category": "expenses",
       "receiver": "B&B",
       "price": 800,
@@ -1009,7 +1009,7 @@
     },
     {
       "id": 100046,
-      "date": "01.06.2021",
+      "date": "04.16.2022",
       "category": "expenses",
       "receiver": "Elefant",
       "price": 55,
@@ -1017,8 +1017,8 @@
       "total_price": 0,
       "products": [
         {
-          "id": 3581,
           "description": "Witcher Pack Books",
+          "id": 3581,
           "amount": 1,
           "price": 55,
           "VAT": 10,
@@ -1028,7 +1028,7 @@
     },
     {
       "id": 100047,
-      "date": "05.18.2021",
+      "date": "05.18.2022",
       "category": "expenses",
       "receiver": "B&B",
       "price": 1000,

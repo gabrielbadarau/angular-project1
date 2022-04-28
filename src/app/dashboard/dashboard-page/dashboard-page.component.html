@@ -1,0 +1,6 @@
+<div class="flex flex-row flex-wrap justify-content-center">
+  <app-weekly-chart class="chart" *ngIf="transactions" [transactions]="transactions"></app-weekly-chart>
+  <app-monthly-chart class="chart" *ngIf="transactions" [transactions]="transactions"></app-monthly-chart>
+  <app-yearly-chart class="chart" *ngIf="transactions" [transactions]="transactions"></app-yearly-chart>
+</div>
+<app-custom-picker *ngIf="transactions" [transactions]="transactions"></app-custom-picker>
