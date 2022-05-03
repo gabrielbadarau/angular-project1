@@ -2,20 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpWrapperService } from '../http-wrapper.service';
 import { Itransactions } from '../transactions/transactions';
 import LOCALHOST from '../localhost';
-import { Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { DateService } from '../shared/date.service';
+import { TransactionsService } from '../transactions/transactions.service';
 
 @Injectable()
 export class DashboardService {
+  transactionsUrl = LOCALHOST + '/transactions';
   transactions: Itransactions[] = [];
-  constructor(private wrappedHttpService: HttpWrapperService, private dateService: DateService) {}
 
-  getTransactions(): Observable<Itransactions[]> {
-    const transactionsUrl = LOCALHOST + '/transactions';
-    return this.wrappedHttpService
-      .get<Itransactions[]>(transactionsUrl)
-      .pipe(tap((data) => (this.transactions = data)));
-  }
+  transactions$ = this.wrappedHttpService
+    .get<Itransactions[]>(this.transactionsUrl)
+    .pipe(tap((data) => (this.transactions = data)));
+
+  constructor(
+    private wrappedHttpService: HttpWrapperService,
+    private dateService: DateService,
+    private transactionsService: TransactionsService
+  ) {}
 
   getTransactionsDatesString(): string[] {
     return this.transactions.map((transaction) => transaction.date);

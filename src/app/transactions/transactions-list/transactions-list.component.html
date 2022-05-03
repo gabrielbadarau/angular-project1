@@ -1,4 +1,7 @@
-<div class="card">
+<div class="p-error" *ngIf="errorMessage$ | async as errorMessage">
+  <h2>{{ errorMessage }}</h2>
+</div>
+<div *ngIf="transactionsWithDelete$ | async as transactions" class="card">
   <p-table [value]="transactions">
     <ng-template pTemplate="header">
       <tr>
@@ -20,7 +23,7 @@
           <p-button type="button">Edit</p-button>
         </td>
         <td class="select">
-          <button (click)="confirmDelete(transaction.id)" pButton icon="pi pi-trash"></button>
+          <button (click)="confirmDelete(transaction)" pButton icon="pi pi-trash"></button>
         </td>
       </tr>
     </ng-template>
@@ -28,3 +31,7 @@
 </div>
 
 <p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
+
+<p-toast>
+  <div *ngIf="toastMessage | async"></div>
+</p-toast>

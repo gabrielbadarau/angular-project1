@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, Subscription } from 'rxjs';
+import { catchError, EMPTY, Subject, take, tap } from 'rxjs';
 import { Iusers } from '../users';
 import { UsersService } from '../users.service';
 import { ConfirmationService } from 'primeng/api';
@@ -11,13 +11,16 @@ import { ConfirmationService } from 'primeng/api';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css'],
   providers: [ConfirmationService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserEditComponent implements OnInit, OnDestroy {
+export class UserEditComponent implements OnInit {
   userForm: FormGroup;
   user: Iusers;
-  isUpdating: boolean = false;
+  isUpdating = false;
   displayModal: boolean;
-  userEditSubscriptions: Subscription[] = [];
+
+  private errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
 
   private answerModal = new Subject<boolean>();
   selectAnswerModal$ = this.answerModal.asObservable();
@@ -40,18 +43,17 @@ export class UserEditComponent implements OnInit, OnDestroy {
       role: ['', Validators.required],
       permissions: ['', Validators.required],
     });
-
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.userEditSubscriptions.push(
-      this.usersService.getId(id).subscribe({
-        next: (user) => this.displayUser(user),
-        error: (error) => console.error(error),
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.userEditSubscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.usersService
+      .getId(+this.route.snapshot.paramMap.get('id'))
+      .pipe(
+        tap((data) => this.displayUser(data)),
+        catchError((err) => {
+          this.errorMessageSubject.next(err);
+          return EMPTY;
+        }),
+        take(1)
+      )
+      .subscribe();
   }
 
   displayUser(user: Iusers): void {
@@ -74,18 +76,19 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.isUpdating = true;
 
     if (this.userForm.dirty) {
-      this.userEditSubscriptions.push(
-        this.usersService.updateUser(this.user.id, this.userForm.value).subscribe({
-          next: () => {
-            this.usersService.changeUpdateUserSuccess(true);
-            this.router.navigate(['/users']);
-          },
-          error: (error) => {
-            console.error(error);
-            this.usersService.changeUpdateUserSuccess(false);
-          },
-        })
-      );
+      this.usersService
+        .updateUser(this.user.id, this.userForm.value)
+        .pipe(
+          tap(() => this.usersService.pushMessageAction(true, 'updated')),
+          catchError((err) => {
+            this.usersService.pushMessageAction(false, 'updated');
+            this.errorMessageSubject.next(err);
+            return EMPTY;
+          }),
+          take(1)
+        )
+        .subscribe();
+      this.router.navigate(['/users']);
     } else {
       this.router.navigate(['/users']);
     }
@@ -97,18 +100,19 @@ export class UserEditComponent implements OnInit, OnDestroy {
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.userEditSubscriptions.push(
-          this.usersService.deleteUser(this.user.id).subscribe({
-            next: () => {
-              this.usersService.changeUpdateDeleteUser(true);
-              this.router.navigate(['/users']);
-            },
-            error: (error) => {
-              console.error(error);
-              this.usersService.changeUpdateDeleteUser(false);
-            },
-          })
-        );
+        this.usersService
+          .deleteUser(this.user.id)
+          .pipe(
+            tap(() => this.usersService.pushMessageAction(true, 'deleted')),
+            catchError((err) => {
+              this.usersService.pushMessageAction(false, 'deleted');
+              this.errorMessageSubject.next(err);
+              return EMPTY;
+            }),
+            take(1)
+          )
+          .subscribe();
+        this.router.navigate(['/users']);
       },
       reject: null,
     });
@@ -118,12 +122,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.router.navigate(['/users']);
   }
 
-  changeAnswerModal(value: boolean) {
-    this.answerModal.next(value);
-  }
-
   modalChoice(event): void {
     this.displayModal = false;
-    this.changeAnswerModal(event.target.innerText === 'Yes' ? true : false);
+    this.answerModal.next(event.target.innerText === 'Yes' ? true : false);
   }
 }

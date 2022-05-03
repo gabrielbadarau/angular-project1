@@ -9,23 +9,21 @@ export class UsersService {
   private usersUrl = LOCALHOST + '/users';
   private users: Iusers[] = [];
 
-  private updateUserSuccessSource = new Subject<boolean>();
-  updateUserSuccessChange$ = this.updateUserSuccessSource.asObservable();
+  users$ = this.wrappedHttp.get<Iusers[]>(this.usersUrl).pipe(tap((data) => (this.users = data)));
 
-  private updateDeleteUserSource = new Subject<boolean>();
-  updateDeleteUserChange$ = this.updateDeleteUserSource.asObservable();
+  private toastMessageSubject = new Subject<[value: boolean, action: string]>();
+  toastMessageAction$ = this.toastMessageSubject.asObservable();
+
+  private choiceToDeleteUserSubject = new Subject<Iusers>();
+  choiceToDeleteUserAction$ = this.choiceToDeleteUserSubject.asObservable();
 
   constructor(private wrappedHttp: HttpWrapperService) {}
 
-  changeUpdateUserSuccess(value: boolean) {
-    this.updateUserSuccessSource.next(value);
+  pushChoiceDeleteUser(value: Iusers) {
+    this.choiceToDeleteUserSubject.next(value);
   }
-  changeUpdateDeleteUser(value: boolean) {
-    this.updateDeleteUserSource.next(value);
-  }
-
-  getUsers(): Observable<Iusers[]> {
-    return this.wrappedHttp.get<Iusers[]>(this.usersUrl).pipe(tap((data) => (this.users = data)));
+  pushMessageAction(value: boolean, action: string) {
+    this.toastMessageSubject.next([value, action]);
   }
 
   getId(id: number): Observable<Iusers> {

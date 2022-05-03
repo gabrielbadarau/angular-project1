@@ -7,6 +7,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserEditGuardService } from './user-edit/user-edit-guard.service';
 
+import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
@@ -19,6 +20,7 @@ import { HttpWrapperService } from '../http-wrapper.service';
 @NgModule({
   declarations: [UsersListComponent, UserDetailComponent, UserEditComponent],
   imports: [
+    ToastModule,
     ReactiveFormsModule,
     CommonModule,
     TableModule,

@@ -1,4 +1,8 @@
-<div class="surface-section">
+<div class="p-error" *ngIf="errorMessage$ | async as errorMessage">
+  <h2>{{ errorMessage }}</h2>
+</div>
+
+<div *ngIf="product$ | async as product" class="surface-section">
   <ul class="list-none p-0 m-0">
     <li class="flex align-items-center py-3 px-2 surface-border flex-wrap">
       <div i18n class="text-500 w-6 md:w-2 font-medium">Description</div>

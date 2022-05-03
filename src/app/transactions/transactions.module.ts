@@ -16,6 +16,7 @@ import { TransactionEditComponent } from './transaction-edit/transaction-edit.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { TransactionEditGuardService } from './transaction-edit/transaction-edit-guard.service';
 import { HttpWrapperService } from '../http-wrapper.service';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { HttpWrapperService } from '../http-wrapper.service';
     TransactionEditComponent,
   ],
   imports: [
+    ToastModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
     DialogModule,
