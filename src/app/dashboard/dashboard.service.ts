@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Itransactions } from '../transactions/transactions';
-import LOCALHOST from '../localhost';
 import { tap } from 'rxjs';
 import { DateService } from '../shared/date.service';
 import { TransactionsService } from '../transactions/transactions.service';
 
 @Injectable()
 export class DashboardService {
-  transactionsUrl = LOCALHOST + '/transactions';
   transactions: Itransactions[] = [];
 
   transactions$ = this.transactionsService.transactions$.pipe(tap((data) => (this.transactions = data)));
