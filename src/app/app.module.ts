@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { TransactionsModule } from './transactions/transactions.module';
 import { UsersModule } from './users/users.module';
 
-import { ToastModule } from 'primeng/toast';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { MenuModule } from 'primeng/menu';
 import { SidebarModule } from 'primeng/sidebar';
@@ -22,7 +21,6 @@ import { DashboardPageComponent } from './dashboard/dashboard-page/dashboard-pag
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ToastModule,
     TabMenuModule,
     MenuModule,
     SidebarModule,

@@ -1,4 +1,7 @@
-<div *ngIf="user" class="surface-section">
+<div class="p-error" *ngIf="errorMessage$ | async as errorMessage">
+  <h2>{{ errorMessage }}</h2>
+</div>
+<div *ngIf="user$ | async as user" class="surface-section">
   <div class="font-medium text-3xl text-900 mb-3">{{ user?.first_name }} {{ user.last_name }}</div>
   <div i18n class="text-500 mb-5">ID: {{ user.id }}</div>
   <ul class="list-none p-0 m-0">

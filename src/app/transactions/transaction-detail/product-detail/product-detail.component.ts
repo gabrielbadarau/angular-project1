@@ -1,41 +1,28 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Iproducts } from '../../transactions';
+import { catchError, combineLatest, EMPTY, map, Subject } from 'rxjs';
 import { TransactionsService } from '../../transactions.service';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductDetailComponent implements OnInit, OnDestroy {
-  transactionId: number;
-  productId: number;
-  products: Iproducts[];
-  product: Iproducts;
-  productSubscription: Subscription;
+export class ProductDetailComponent {
+  private errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
+
+  product$ = combineLatest([
+    this.transactionsService.getId(this.route.snapshot.parent.params['id']),
+    this.route.paramMap,
+  ]).pipe(
+    map(([transaction, params]) => transaction.products.find((product) => product.id === +params.get('id'))),
+    catchError((err) => {
+      this.errorMessageSubject.next(err);
+      return EMPTY;
+    })
+  );
 
   constructor(private route: ActivatedRoute, private transactionsService: TransactionsService) {}
-
-  ngOnInit(): void {
-    this.transactionId = this.route.snapshot.parent.params['id'];
-    this.productSubscription = this.transactionsService.getId(this.transactionId).subscribe({
-      next: (transaction) => {
-        this.products = transaction.products;
-        this.route.paramMap.subscribe((params) => {
-          this.productId = Number(params.get('id'));
-          this.findProduct(this.productId);
-        });
-      },
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.productSubscription.unsubscribe();
-  }
-
-  findProduct(id: number): void {
-    this.product = this.products.find((product) => product.id === id);
-  }
 }

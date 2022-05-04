@@ -9,23 +9,23 @@ export class TransactionsService {
   private transactionsUrl = LOCALHOST + '/transactions';
   private transactions: Itransactions[] = [];
 
-  private updateTransactionSuccessSource = new Subject<boolean>();
-  updateTransactionSuccessChange$ = this.updateTransactionSuccessSource.asObservable();
+  transactions$ = this.wrappedHttp
+    .get<Itransactions[]>(this.transactionsUrl)
+    .pipe(tap((data) => (this.transactions = data)));
 
-  private updateDeleteTransactionSource = new Subject<boolean>();
-  updateDeleteTransactionChange$ = this.updateDeleteTransactionSource.asObservable();
+  private toastMessageSubject = new Subject<[value: boolean, action: string]>();
+  toastMessageAction$ = this.toastMessageSubject.asObservable();
+
+  private choiceToDeleteTransactionSubject = new Subject<Itransactions>();
+  choiceToDeleteTransactionAction$ = this.choiceToDeleteTransactionSubject.asObservable();
 
   constructor(private wrappedHttp: HttpWrapperService) {}
 
-  changeUpdateTransactionSuccess(value: boolean) {
-    this.updateTransactionSuccessSource.next(value);
+  pushChoiceDeleteTransaction(value: Itransactions) {
+    this.choiceToDeleteTransactionSubject.next(value);
   }
-  changeUpdateDeleteTransaction(value: boolean) {
-    this.updateDeleteTransactionSource.next(value);
-  }
-
-  getTransactions(): Observable<Itransactions[]> {
-    return this.wrappedHttp.get<Itransactions[]>(this.transactionsUrl).pipe(tap((data) => (this.transactions = data)));
+  pushMessageAction(value: boolean, action: string) {
+    this.toastMessageSubject.next([value, action]);
   }
 
   getId(id: number): Observable<Itransactions> {

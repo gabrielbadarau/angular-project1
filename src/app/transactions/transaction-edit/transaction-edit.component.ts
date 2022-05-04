@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { Subject, Subscription } from 'rxjs';
+import { catchError, EMPTY, Subject, take, tap } from 'rxjs';
+import { DateService } from 'src/app/shared/date.service';
 import { Itransactions } from '../transactions';
 import { TransactionsService } from '../transactions.service';
 
@@ -11,13 +12,16 @@ import { TransactionsService } from '../transactions.service';
   templateUrl: './transaction-edit.component.html',
   styleUrls: ['./transaction-edit.component.css'],
   providers: [ConfirmationService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionEditComponent implements OnInit, OnDestroy {
+export class TransactionEditComponent implements OnInit {
   transactionForm: FormGroup;
   transaction: Itransactions;
-  isUpdating: boolean = false;
+  isUpdating = false;
   displayModal: boolean;
-  transactionEditSubscriptions: Subscription[] = [];
+
+  private errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
 
   private answerModal = new Subject<boolean>();
   selectAnswerModal$ = this.answerModal.asObservable();
@@ -31,7 +35,8 @@ export class TransactionEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private transactionsService: TransactionsService,
     private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private dateService: DateService
   ) {}
 
   ngOnInit(): void {
@@ -45,18 +50,17 @@ export class TransactionEditComponent implements OnInit, OnDestroy {
       total_price: [null],
       products: this.fb.array([]),
     });
-
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.transactionEditSubscriptions.push(
-      this.transactionsService.getId(id).subscribe({
-        next: (transaction) => this.displayTransaction(transaction),
-        error: (error) => console.error(error),
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.transactionEditSubscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.transactionsService
+      .getId(+this.route.snapshot.paramMap.get('id'))
+      .pipe(
+        tap((data) => this.displayTransaction(data)),
+        catchError((err) => {
+          this.errorMessageSubject.next(err);
+          return EMPTY;
+        }),
+        take(1)
+      )
+      .subscribe();
   }
 
   displayTransaction(transaction: Itransactions): void {
@@ -81,31 +85,26 @@ export class TransactionEditComponent implements OnInit, OnDestroy {
 
   save(): void {
     this.isUpdating = true;
-
-    // below, we transform the date from the calendar picker to string so that could fit in our database
-    this.transactionForm.value.date = `${
-      this.transactionForm.value.date.getMonth() + 1 < 10
-        ? '0' + (this.transactionForm.value.date.getMonth() + 1)
-        : this.transactionForm.value.date.getMonth() + 1
-    }.${
-      this.transactionForm.value.date.getDate() < 10
-        ? '0' + this.transactionForm.value.date.getDate()
-        : this.transactionForm.value.date.getDate()
-    }.${this.transactionForm.value.date.getFullYear()}`;
-
     if (this.transactionForm.dirty) {
-      this.transactionEditSubscriptions.push(
-        this.transactionsService.updateTransaction(this.transaction.id, this.transactionForm.value).subscribe({
-          next: () => {
-            this.transactionsService.changeUpdateTransactionSuccess(true);
-            this.router.navigate(['/transactions']);
-          },
-          error: (error) => {
-            console.error(error);
-            this.transactionsService.changeUpdateTransactionSuccess(false);
-          },
-        })
-      );
+      if (this.transactionForm.value.date instanceof Date) {
+        this.transactionForm.value.date = this.dateService.transformDatesToStrings([
+          this.transactionForm.value.date,
+        ])[0];
+      }
+      //above we transform the date from the calendar picker to string so that could fit in our database
+      this.transactionsService
+        .updateTransaction(this.transaction.id, this.transactionForm.value)
+        .pipe(
+          tap(() => this.transactionsService.pushMessageAction(true, 'updated')),
+          catchError((err) => {
+            this.transactionsService.pushMessageAction(false, 'updated');
+            this.errorMessageSubject.next(err);
+            return EMPTY;
+          }),
+          take(1)
+        )
+        .subscribe();
+      this.router.navigate(['/transactions']);
     } else {
       this.router.navigate(['/transactions']);
     }
@@ -117,18 +116,19 @@ export class TransactionEditComponent implements OnInit, OnDestroy {
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.transactionEditSubscriptions.push(
-          this.transactionsService.deleteTransaction(this.transaction.id).subscribe({
-            next: () => {
-              this.transactionsService.changeUpdateDeleteTransaction(true);
-              this.router.navigate(['/transactions']);
-            },
-            error: (error) => {
-              console.error(error);
-              this.transactionsService.changeUpdateDeleteTransaction(false);
-            },
-          })
-        );
+        this.transactionsService
+          .deleteTransaction(this.transaction.id)
+          .pipe(
+            tap(() => this.transactionsService.pushMessageAction(true, 'deleted')),
+            catchError((err) => {
+              this.transactionsService.pushMessageAction(false, 'deleted');
+              this.errorMessageSubject.next(err);
+              return EMPTY;
+            }),
+            take(1)
+          )
+          .subscribe();
+        this.router.navigate(['/transactions']);
       },
       reject: null,
     });
@@ -149,12 +149,8 @@ export class TransactionEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  changeAnswerModal(value: boolean) {
-    this.answerModal.next(value);
-  }
-
   modalChoice(event): void {
     this.displayModal = false;
-    this.changeAnswerModal(event.target.innerText === 'Yes' ? true : false);
+    this.answerModal.next(event.target.innerText === 'Yes' ? true : false);
   }
 }

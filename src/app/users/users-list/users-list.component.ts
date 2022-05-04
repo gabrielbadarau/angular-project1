@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Subscription } from 'rxjs';
-import { UserEditComponent } from '../user-edit/user-edit.component';
+import { catchError, combineLatest, EMPTY, mergeMap, startWith, Subject, tap } from 'rxjs';
 import { Iusers } from '../users';
 import { UsersService } from '../users.service';
 
@@ -10,51 +8,60 @@ import { UsersService } from '../users.service';
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.css'],
-  providers: [ConfirmationService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ConfirmationService, MessageService],
 })
-export class UsersListComponent implements OnInit, OnDestroy {
-  users: Iusers[] = [];
-  usersSubscriptions: Subscription[] = [];
+export class UsersListComponent {
+  private errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
+
+  toastMessage = this.usersService.toastMessageAction$.pipe(tap((data) => this.handleMessage(data[0], data[1])));
+
+  usersWithDelete$ = combineLatest([
+    this.usersService.users$,
+    this.usersService.choiceToDeleteUserAction$.pipe(
+      mergeMap((user) => this.usersService.deleteUser(user.id)),
+      tap(() => this.usersService.pushMessageAction(true, 'deleted')),
+      catchError((err) => {
+        this.usersService.pushMessageAction(false, 'deleted');
+        this.errorMessageSubject.next(err);
+        return EMPTY;
+      }),
+      startWith(null)
+    ),
+  ]).pipe(
+    mergeMap(() => this.usersService.users$),
+    catchError((err) => {
+      this.errorMessageSubject.next(err);
+      return EMPTY;
+    })
+  );
 
   constructor(
     private usersService: UsersService,
-    private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
-  ngOnInit(): void {
-    this.usersSubscriptions.push(
-      this.usersService.getUsers().subscribe({
-        next: (users: Iusers[]) => {
-          this.users = users;
-        },
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.usersSubscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
-
-  confirmDelete(id) {
+  confirmDelete(user: Iusers) {
     this.confirmationService.confirm({
       message: 'Do you want to delete this user?',
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.usersSubscriptions.push(
-          this.usersService.deleteUser(id).subscribe({
-            next: () => {
-              this.usersService.changeUpdateDeleteUser(true);
-              this.ngOnInit();
-            },
-            error: (error) => {
-              console.error(error);
-              this.usersService.changeUpdateDeleteUser(false);
-            },
-          })
-        );
+        this.usersService.pushChoiceDeleteUser(user);
       },
+      reject: null,
+    });
+  }
+
+  handleMessage(value: boolean, action: string): void {
+    this.messageService.add({
+      severity: value ? 'success' : 'error',
+      summary: value ? 'Success' : 'Error',
+      detail: value
+        ? `Operation succesful, user ${action} !`
+        : `Operation failed, the user has not been ${action}. Check the errors.`,
     });
   }
 }

@@ -1,4 +1,7 @@
-<div *ngIf="transaction" class="surface-section">
+<div class="p-error" *ngIf="errorMessage$ | async as errorMessage">
+  <h2>{{ errorMessage }}</h2>
+</div>
+<div *ngIf="transaction$ | async as transaction" class="surface-section">
   <div i18n class="font-medium text-3xl text-900 mb-3">Transaction ID no. {{ transaction.id }}</div>
   <ul class="list-none p-0 m-0">
     <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
