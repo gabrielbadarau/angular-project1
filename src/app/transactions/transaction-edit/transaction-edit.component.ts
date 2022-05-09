@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { ConfirmationService } from 'primeng/api';
-import { catchError, EMPTY, Subject, take, tap } from 'rxjs';
+import { Subject, tap } from 'rxjs';
 import { DateService } from 'src/app/shared/date.service';
+import { State } from 'src/app/state/app.state';
 import { Itransactions } from '../transactions';
-import { TransactionsService } from '../transactions.service';
+import { TransactionsPageActions } from '../state/actions';
+import { selectTransactionsError, selectTransactionWithId } from '../state';
 
 @Component({
   selector: 'app-transaction-edit',
@@ -18,10 +21,18 @@ export class TransactionEditComponent implements OnInit {
   transactionForm: FormGroup;
   transaction: Itransactions;
   isUpdating = false;
-  displayModal: boolean;
+  showModal = false;
 
-  private errorMessageSubject = new Subject<string>();
-  errorMessage$ = this.errorMessageSubject.asObservable();
+  transaction$ = this.store.pipe(
+    select(selectTransactionWithId),
+    tap((data) =>
+      data ? this.displayTransaction(data) : this.store.dispatch(TransactionsPageActions.getTransactionsList())
+    )
+  );
+  errorMessage$ = this.store.pipe(select(selectTransactionsError));
+
+  private displayModalSubject = new Subject<boolean>();
+  displayModal$ = this.displayModalSubject.asObservable().pipe(tap((data) => (this.showModal = data)));
 
   private answerModal = new Subject<boolean>();
   selectAnswerModal$ = this.answerModal.asObservable();
@@ -33,13 +44,18 @@ export class TransactionEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private transactionsService: TransactionsService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private dateService: DateService
+    private dateService: DateService,
+    private store: Store<State>
   ) {}
 
+  showModalAction(value: boolean) {
+    this.displayModalSubject.next(value);
+  }
+
   ngOnInit(): void {
+    this.store.dispatch(TransactionsPageActions.setTransactionId({ id: +this.route.snapshot.paramMap.get('id') }));
     this.transactionForm = this.fb.group({
       id: [null, [Validators.required, Validators.min(1)]],
       date: ['', Validators.required],
@@ -50,17 +66,6 @@ export class TransactionEditComponent implements OnInit {
       total_price: [null],
       products: this.fb.array([]),
     });
-    this.transactionsService
-      .getId(+this.route.snapshot.paramMap.get('id'))
-      .pipe(
-        tap((data) => this.displayTransaction(data)),
-        catchError((err) => {
-          this.errorMessageSubject.next(err);
-          return EMPTY;
-        }),
-        take(1)
-      )
-      .subscribe();
   }
 
   displayTransaction(transaction: Itransactions): void {
@@ -92,18 +97,7 @@ export class TransactionEditComponent implements OnInit {
         ])[0];
       }
       //above we transform the date from the calendar picker to string so that could fit in our database
-      this.transactionsService
-        .updateTransaction(this.transaction.id, this.transactionForm.value)
-        .pipe(
-          tap(() => this.transactionsService.pushMessageAction(true, 'updated')),
-          catchError((err) => {
-            this.transactionsService.pushMessageAction(false, 'updated');
-            this.errorMessageSubject.next(err);
-            return EMPTY;
-          }),
-          take(1)
-        )
-        .subscribe();
+      this.store.dispatch(TransactionsPageActions.updateTransactionsList({ transaction: this.transactionForm.value }));
       this.router.navigate(['/transactions']);
     } else {
       this.router.navigate(['/transactions']);
@@ -116,18 +110,7 @@ export class TransactionEditComponent implements OnInit {
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.transactionsService
-          .deleteTransaction(this.transaction.id)
-          .pipe(
-            tap(() => this.transactionsService.pushMessageAction(true, 'deleted')),
-            catchError((err) => {
-              this.transactionsService.pushMessageAction(false, 'deleted');
-              this.errorMessageSubject.next(err);
-              return EMPTY;
-            }),
-            take(1)
-          )
-          .subscribe();
+        this.store.dispatch(TransactionsPageActions.deleteTransaction({ id: this.transaction.id }));
         this.router.navigate(['/transactions']);
       },
       reject: null,
@@ -150,7 +133,7 @@ export class TransactionEditComponent implements OnInit {
   }
 
   modalChoice(event): void {
-    this.displayModal = false;
     this.answerModal.next(event.target.innerText === 'Yes' ? true : false);
+    this.showModalAction(false);
   }
 }

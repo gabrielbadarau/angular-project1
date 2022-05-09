@@ -2,7 +2,7 @@
   <h2>{{ errorMessage }}</h2>
 </div>
 <div class="card">
-  <form novalidate [formGroup]="transactionForm" (ngSubmit)="save()">
+  <form *ngIf="transaction$ | async" novalidate [formGroup]="transactionForm" (ngSubmit)="save()">
     <div class="field">
       <label i18n for="date">Date</label>
       <p-calendar
@@ -150,9 +150,10 @@
 </div>
 
 <p-dialog
+  *ngIf="displayModal$ | async"
   i18n-header
   header="Naigate Away"
-  [(visible)]="displayModal"
+  [(visible)]="showModal"
   [modal]="true"
   [style]="{ width: '50vw' }"
   [baseZIndex]="10000"

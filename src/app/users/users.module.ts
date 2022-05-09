@@ -16,6 +16,10 @@ import { UsersService } from './users.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { HttpWrapperService } from '../http-wrapper.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { usersReducer } from './state/users.reducer';
+import { UsersEffects } from './state/users.effects';
 
 @NgModule({
   declarations: [UsersListComponent, UserDetailComponent, UserEditComponent],
@@ -33,6 +37,8 @@ import { HttpWrapperService } from '../http-wrapper.service';
       { path: 'users/:id', component: UserDetailComponent },
       { path: 'users/:id/edit', canDeactivate: [UserEditGuardService], component: UserEditComponent },
     ]),
+    StoreModule.forFeature('users', usersReducer),
+    EffectsModule.forFeature([UsersEffects]),
   ],
   providers: [HttpWrapperService, UsersService, UserEditGuardService],
 })

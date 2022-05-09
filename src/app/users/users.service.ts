@@ -7,9 +7,8 @@ import { HttpWrapperService } from '../http-wrapper.service';
 @Injectable()
 export class UsersService {
   private usersUrl = LOCALHOST + '/users';
-  private users: Iusers[] = [];
 
-  users$ = this.wrappedHttp.get<Iusers[]>(this.usersUrl).pipe(tap((data) => (this.users = data)));
+  users$ = this.wrappedHttp.get<Iusers[]>(this.usersUrl);
 
   private toastMessageSubject = new Subject<[value: boolean, action: string]>();
   toastMessageAction$ = this.toastMessageSubject.asObservable();
@@ -26,19 +25,8 @@ export class UsersService {
     this.toastMessageSubject.next([value, action]);
   }
 
-  getId(id: number): Observable<Iusers> {
-    if (this.users) {
-      const foundUser = this.users.find((user) => user.id === id);
-      if (foundUser) {
-        return of(foundUser);
-      }
-    }
-    const userUrl = `${this.usersUrl}/${id}`;
-    return this.wrappedHttp.get<Iusers>(userUrl);
-  }
-
-  updateUser(id: number, updatedUser: Iusers): Observable<Iusers> {
-    const userUrl = `${this.usersUrl}/${id}`;
+  updateUser(updatedUser: Iusers): Observable<Iusers> {
+    const userUrl = `${this.usersUrl}/${updatedUser.id}`;
     return this.wrappedHttp.put<Iusers>(userUrl, updatedUser);
   }
 

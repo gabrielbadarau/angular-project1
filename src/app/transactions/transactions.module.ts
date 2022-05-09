@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
-
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CalendarModule } from 'primeng/calendar';
@@ -17,6 +16,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TransactionEditGuardService } from './transaction-edit/transaction-edit-guard.service';
 import { HttpWrapperService } from '../http-wrapper.service';
 import { ToastModule } from 'primeng/toast';
+import { StoreModule } from '@ngrx/store';
+import { transactionsReducer } from './state/transactions.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { TransactionsEffects } from './state/transactions.effects';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,8 @@ import { ToastModule } from 'primeng/toast';
       },
       { path: 'transactions', component: TransactionsListComponent },
     ]),
+    StoreModule.forFeature('transactions', transactionsReducer),
+    EffectsModule.forFeature([TransactionsEffects]),
   ],
   providers: [HttpWrapperService, TransactionsService, TransactionEditGuardService],
 })

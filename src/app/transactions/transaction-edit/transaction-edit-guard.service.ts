@@ -6,7 +6,7 @@ import { TransactionEditComponent } from './transaction-edit.component';
 @Injectable()
 export class TransactionEditGuardService implements CanDeactivate<TransactionEditComponent> {
   canDeactivate(component: TransactionEditComponent): Observable<boolean> {
-    component.displayModal = true;
+    component.showModalAction(true);
     if (component.transactionForm.dirty && !component.isUpdating) {
       return component.selectAnswerModal$;
     }

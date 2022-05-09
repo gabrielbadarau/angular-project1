@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { catchError, combineLatest, EMPTY, map, Subject } from 'rxjs';
-import { TransactionsService } from '../../transactions.service';
+import { select, Store } from '@ngrx/store';
+import { map, tap, withLatestFrom } from 'rxjs';
+import { State } from 'src/app/state/app.state';
+import { TransactionsPageActions } from '../../state/actions';
+import { selectProductWithId, selectTransactionsError } from '../../state';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,19 +13,11 @@ import { TransactionsService } from '../../transactions.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent {
-  private errorMessageSubject = new Subject<string>();
-  errorMessage$ = this.errorMessageSubject.asObservable();
-
-  product$ = combineLatest([
-    this.transactionsService.getId(this.route.snapshot.parent.params['id']),
-    this.route.paramMap,
-  ]).pipe(
-    map(([transaction, params]) => transaction.products.find((product) => product.id === +params.get('id'))),
-    catchError((err) => {
-      this.errorMessageSubject.next(err);
-      return EMPTY;
-    })
+  product$ = this.route.paramMap.pipe(
+    tap((data) => this.store.dispatch(TransactionsPageActions.setProductId({ id: +data.get('id') }))),
+    withLatestFrom(this.store.pipe(select(selectProductWithId))),
+    map((data) => data[1])
   );
-
-  constructor(private route: ActivatedRoute, private transactionsService: TransactionsService) {}
+  errorMessage$ = this.store.pipe(select(selectTransactionsError));
+  constructor(private route: ActivatedRoute, private store: Store<State>) {}
 }

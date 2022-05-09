@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject, tap } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Itransactions } from './transactions';
 import LOCALHOST from '../localhost';
 import { HttpWrapperService } from '../http-wrapper.service';
@@ -7,11 +7,8 @@ import { HttpWrapperService } from '../http-wrapper.service';
 @Injectable()
 export class TransactionsService {
   private transactionsUrl = LOCALHOST + '/transactions';
-  private transactions: Itransactions[] = [];
 
-  transactions$ = this.wrappedHttp
-    .get<Itransactions[]>(this.transactionsUrl)
-    .pipe(tap((data) => (this.transactions = data)));
+  transactions$ = this.wrappedHttp.get<Itransactions[]>(this.transactionsUrl);
 
   private toastMessageSubject = new Subject<[value: boolean, action: string]>();
   toastMessageAction$ = this.toastMessageSubject.asObservable();
@@ -24,23 +21,13 @@ export class TransactionsService {
   pushChoiceDeleteTransaction(value: Itransactions) {
     this.choiceToDeleteTransactionSubject.next(value);
   }
+
   pushMessageAction(value: boolean, action: string) {
     this.toastMessageSubject.next([value, action]);
   }
 
-  getId(id: number): Observable<Itransactions> {
-    if (this.transactions) {
-      const foundTransaction = this.transactions.find((transaction) => transaction.id === id);
-      if (foundTransaction) {
-        return of(foundTransaction);
-      }
-    }
-    const transactionUrl = `${this.transactionsUrl}/${id}`;
-    return this.wrappedHttp.get<Itransactions>(transactionUrl);
-  }
-
-  updateTransaction(id: number, updatedTransaction: Itransactions): Observable<Itransactions> {
-    const transactionUrl = `${this.transactionsUrl}/${id}`;
+  updateTransaction(updatedTransaction: Itransactions): Observable<Itransactions> {
+    const transactionUrl = `${this.transactionsUrl}/${updatedTransaction.id}`;
     return this.wrappedHttp.put<Itransactions>(transactionUrl, updatedTransaction);
   }
 

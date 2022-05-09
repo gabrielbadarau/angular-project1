@@ -1,3 +1,4 @@
+<div hidden *ngIf="checkProductId$ | async"></div>
 <div class="p-error" *ngIf="errorMessage$ | async as errorMessage">
   <h2>{{ errorMessage }}</h2>
 </div>
