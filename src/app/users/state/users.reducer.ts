@@ -1,4 +1,4 @@
-import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { Iusers } from '../users';
 import { UsersApiActions, UsersPageActions } from './actions';
 
