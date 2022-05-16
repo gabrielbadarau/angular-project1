@@ -6,7 +6,7 @@ import { UserEditComponent } from './user-edit.component';
 @Injectable()
 export class UserEditGuardService implements CanDeactivate<UserEditComponent> {
   canDeactivate(component: UserEditComponent): Observable<boolean> {
-    component.displayModal = true;
+    component.showModalAction(true);
     if (component.userForm.dirty && !component.isUpdating) {
       return component.selectAnswerModal$;
     }

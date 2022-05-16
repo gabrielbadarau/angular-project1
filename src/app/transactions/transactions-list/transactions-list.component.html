@@ -1,7 +1,7 @@
 <div class="p-error" *ngIf="errorMessage$ | async as errorMessage">
   <h2>{{ errorMessage }}</h2>
 </div>
-<div *ngIf="transactionsWithDelete$ | async as transactions" class="card">
+<div *ngIf="transactions$ | async as transactions" class="card">
   <p-table [value]="transactions">
     <ng-template pTemplate="header">
       <tr>
@@ -33,5 +33,5 @@
 <p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
 
 <p-toast>
-  <div *ngIf="toastMessage | async"></div>
+  <div *ngIf="toastMessage$ | async"></div>
 </p-toast>

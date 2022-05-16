@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, EMPTY, Subject } from 'rxjs';
-import { TransactionsService } from '../transactions.service';
+import { select, Store } from '@ngrx/store';
+import { tap } from 'rxjs';
+import { State } from 'src/app/state/app.state';
+import { TransactionsPageActions } from '../state/actions';
+import { selectTransactionsError, selectTransactionWithId, selectProductId } from '../state';
 
 @Component({
   selector: 'app-transaction-detail',
@@ -9,37 +12,30 @@ import { TransactionsService } from '../transactions.service';
   styleUrls: ['./transaction-detail.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionDetailComponent {
-  id: number;
+export class TransactionDetailComponent implements OnInit {
   currentProductId: number;
-  showProduct = false;
 
-  transaction$ = this.transactionsService.getId(+this.route.snapshot.paramMap.get('id')).pipe(
-    catchError((err) => {
-      this.errorMessageSubject.next(err);
-      return EMPTY;
-    })
+  transaction$ = this.store.pipe(
+    select(selectTransactionWithId),
+    tap((data) => (!data ? this.store.dispatch(TransactionsPageActions.getTransactionsList()) : null))
   );
+  checkProductId$ = this.store.pipe(
+    select(selectProductId),
+    tap((data) => (data ? (this.currentProductId = data) : null))
+  );
+  errorMessage$ = this.store.pipe(select(selectTransactionsError));
 
-  private errorMessageSubject = new Subject<string>();
-  errorMessage$ = this.errorMessageSubject.asObservable();
+  constructor(private route: ActivatedRoute, private router: Router, private store: Store<State>) {}
 
-  constructor(
-    private route: ActivatedRoute,
-    private transactionsService: TransactionsService,
-    private router: Router
-  ) {}
+  ngOnInit(): void {
+    this.store.dispatch(TransactionsPageActions.setTransactionId({ id: +this.route.snapshot.paramMap.get('id') }));
+  }
 
   toggleShowProduct(id: number): void {
-    if (!this.showProduct) {
-      this.showProduct = true;
-      this.currentProductId = id;
-    } else if (this.showProduct && id === this.currentProductId) {
-      this.showProduct = false;
-      this.currentProductId = 0;
+    if (this.currentProductId === id) {
       this.router.navigate(['/transactions', this.route.snapshot.paramMap.get('id')]);
+      this.currentProductId = null;
     } else {
-      this.showProduct = true;
       this.currentProductId = id;
     }
   }

@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TransactionsService } from '../transactions.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { catchError, combineLatest, EMPTY, mergeMap, startWith, Subject, tap } from 'rxjs';
+import { tap } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { State } from 'src/app/state/app.state';
+import { selectTransactionsError, selectTransactionsList } from '../state';
+import { TransactionsPageActions } from '../state/actions';
 
 @Component({
   selector: 'app-transactions-list',
@@ -10,37 +14,23 @@ import { catchError, combineLatest, EMPTY, mergeMap, startWith, Subject, tap } f
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ConfirmationService, MessageService],
 })
-export class TransactionsListComponent {
-  private errorMessageSubject = new Subject<string>();
-  errorMessage$ = this.errorMessageSubject.asObservable();
-
-  toastMessage = this.transactionsService.toastMessageAction$.pipe(tap((data) => this.handleMessage(data[0], data[1])));
-
-  transactionsWithDelete$ = combineLatest([
-    this.transactionsService.transactions$,
-    this.transactionsService.choiceToDeleteTransactionAction$.pipe(
-      mergeMap((transaction) => this.transactionsService.deleteTransaction(transaction.id)),
-      tap(() => this.transactionsService.pushMessageAction(true, 'deleted')),
-      catchError((err) => {
-        this.transactionsService.pushMessageAction(false, 'deleted');
-        this.errorMessageSubject.next(err);
-        return EMPTY;
-      }),
-      startWith(null)
-    ),
-  ]).pipe(
-    mergeMap(() => this.transactionsService.transactions$),
-    catchError((err) => {
-      this.errorMessageSubject.next(err);
-      return EMPTY;
-    })
+export class TransactionsListComponent implements OnInit {
+  toastMessage$ = this.transactionsService.toastMessageAction$.pipe(
+    tap((data) => this.handleMessage(data[0], data[1]))
   );
+  transactions$ = this.store.pipe(select(selectTransactionsList));
+  errorMessage$ = this.store.pipe(select(selectTransactionsError));
 
   constructor(
     private transactionsService: TransactionsService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private store: Store<State>
   ) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(TransactionsPageActions.getTransactionsList());
+  }
 
   confirmDelete(transaction) {
     this.confirmationService.confirm({
@@ -48,7 +38,7 @@ export class TransactionsListComponent {
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.transactionsService.pushChoiceDeleteTransaction(transaction);
+        this.store.dispatch(TransactionsPageActions.deleteTransaction({ id: transaction.id }));
       },
       reject: null,
     });

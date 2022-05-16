@@ -1,7 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { catchError, EMPTY, Subject } from 'rxjs';
-import { UsersService } from '../users.service';
+import { tap } from 'rxjs';
+import { UsersPageActions } from '../state/actions';
+import { selectUsersError, selectUserWithId } from '../state';
+import { select, Store } from '@ngrx/store';
+import { State } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-user-detail',
@@ -9,18 +12,16 @@ import { UsersService } from '../users.service';
   styleUrls: ['./user-detail.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserDetailComponent {
-  id: number;
-
-  user$ = this.userService.getId(+this.route.snapshot.paramMap.get('id')).pipe(
-    catchError((err) => {
-      this.errorMessageSubject.next(err);
-      return EMPTY;
-    })
+export class UserDetailComponent implements OnInit {
+  user$ = this.store.pipe(
+    select(selectUserWithId),
+    tap((data) => (!data ? this.store.dispatch(UsersPageActions.getUsersList()) : null))
   );
+  errorMessage$ = this.store.pipe(select(selectUsersError));
 
-  private errorMessageSubject = new Subject<string>();
-  errorMessage$ = this.errorMessageSubject.asObservable();
+  constructor(private route: ActivatedRoute, private store: Store<State>) {}
 
-  constructor(private route: ActivatedRoute, private userService: UsersService) {}
+  ngOnInit(): void {
+    this.store.dispatch(UsersPageActions.setUserId({ id: +this.route.snapshot.paramMap.get('id') }));
+  }
 }
