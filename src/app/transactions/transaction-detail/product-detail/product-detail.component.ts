@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { map, tap, withLatestFrom } from 'rxjs';
-import { State } from 'src/app/state/app.state';
 import { TransactionsPageActions } from '../../state/actions';
 import { selectProductWithId, selectTransactionsError } from '../../state';
 
@@ -19,5 +18,5 @@ export class ProductDetailComponent {
     map((data) => data[1])
   );
   errorMessage$ = this.store.pipe(select(selectTransactionsError));
-  constructor(private route: ActivatedRoute, private store: Store<State>) {}
+  constructor(private route: ActivatedRoute, private store: Store) {}
 }

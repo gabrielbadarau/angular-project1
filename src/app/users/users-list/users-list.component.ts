@@ -1,12 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { tap } from 'rxjs';
-import { State } from 'src/app/state/app.state';
-import { selectUsersError, selectUsersList } from '../state';
+import { map, tap } from 'rxjs';
 import { Iusers } from '../users';
 import { UsersService } from '../users.service';
-import { UsersPageActions } from '../state/actions';
 
 @Component({
   selector: 'app-users-list',
@@ -15,20 +11,17 @@ import { UsersPageActions } from '../state/actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ConfirmationService, MessageService],
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent {
   toastMessage$ = this.usersService.toastMessageAction$.pipe(tap((data) => this.handleMessage(data[0], data[1])));
-  users$ = this.store.pipe(select(selectUsersList));
-  errorMessage$ = this.store.pipe(select(selectUsersError));
+  users$ = this.usersService.getAll();
+  errorMessage$ = this.usersService.errors$.pipe(map((data) => data.payload.data.error.message));
 
   constructor(
-    private usersService: UsersService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private store: Store<State>
-  ) {}
-
-  ngOnInit(): void {
-    this.store.dispatch(UsersPageActions.getUsersList());
+    private usersService: UsersService
+  ) {
+    this.users$ = usersService.entities$;
   }
 
   confirmDelete(user: Iusers) {
@@ -37,7 +30,7 @@ export class UsersListComponent implements OnInit {
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.store.dispatch(UsersPageActions.deleteUser({ id: user.id }));
+        this.usersService.delete(user.id);
       },
       reject: null,
     });

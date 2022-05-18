@@ -20,6 +20,18 @@ export class TransactionsEffects {
     );
   });
 
+  getTransactionWithId$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TransactionsPageActions.getTransactionWithId),
+      mergeMap((action) =>
+        this.transactionsService.getTransactionWithId(action.id).pipe(
+          map((transaction) => TransactionsApiActions.getTransactionWithIdSuccess({ transaction })),
+          catchError((error) => of(TransactionsApiActions.getTransactionWithIdFailure({ error })))
+        )
+      )
+    );
+  });
+
   updateTransactionsList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TransactionsPageActions.updateTransactionsList),

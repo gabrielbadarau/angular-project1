@@ -1,14 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, tap } from 'rxjs';
+import { map, Subject, tap } from 'rxjs';
 import { Iusers } from '../users';
-import { UsersService } from '../users.service';
 import { ConfirmationService } from 'primeng/api';
-import { UsersPageActions } from '../state/actions';
-import { selectUsersError, selectUserWithId } from '../state';
-import { select, Store } from '@ngrx/store';
-import { State } from 'src/app/state/app.state';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -23,11 +19,10 @@ export class UserEditComponent implements OnInit {
   isUpdating = false;
   showModal = false;
 
-  user$ = this.store.pipe(
-    select(selectUserWithId),
-    tap((data) => (data ? this.displayUser(data) : this.store.dispatch(UsersPageActions.getUsersList())))
-  );
-  errorMessage$ = this.store.pipe(select(selectUsersError));
+  user$ = this.usersService
+    .getByKey(+this.route.snapshot.paramMap.get('id'))
+    .pipe(tap((data) => this.displayUser(data)));
+  errorMessage$ = this.usersService.errors$.pipe(map((data) => data.payload.data.error.message));
 
   private displayModalSubject = new Subject<boolean>();
   displayModal$ = this.displayModalSubject.asObservable().pipe(tap((data) => (this.showModal = data)));
@@ -38,10 +33,9 @@ export class UserEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private usersService: UsersService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private store: Store<State>
+    private usersService: UsersService
   ) {}
 
   showModalAction(value: boolean) {
@@ -49,7 +43,6 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(UsersPageActions.setUserId({ id: +this.route.snapshot.paramMap.get('id') }));
     this.userForm = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -80,7 +73,7 @@ export class UserEditComponent implements OnInit {
   save(): void {
     this.isUpdating = true;
     if (this.userForm.dirty) {
-      this.store.dispatch(UsersPageActions.updateUsersList({ user: this.userForm.value }));
+      this.usersService.update(this.userForm.value);
       this.router.navigate(['/users']);
     } else {
       this.router.navigate(['/users']);
@@ -93,7 +86,7 @@ export class UserEditComponent implements OnInit {
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.store.dispatch(UsersPageActions.deleteUser({ id: this.user.id }));
+        this.usersService.delete(this.user.id);
         this.router.navigate(['/users']);
       },
       reject: null,

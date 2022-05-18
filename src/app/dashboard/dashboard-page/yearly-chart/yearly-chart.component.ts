@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { DateService } from 'src/app/shared/date.service';
 import { Itransactions } from 'src/app/transactions/transactions';
 import { DashboardService } from '../../dashboard.service';
@@ -8,9 +9,11 @@ import { DashboardService } from '../../dashboard.service';
   selector: 'app-yearly-chart',
   templateUrl: './yearly-chart.component.html',
   styleUrls: ['./yearly-chart.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class YearlyChartComponent implements OnInit {
+export class YearlyChartComponent implements OnChanges {
   @Input() transactions: Itransactions[];
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   public barChartOptions: ChartConfiguration['options'] = {
     plugins: {
@@ -39,8 +42,8 @@ export class YearlyChartComponent implements OnInit {
 
   constructor(private dashboardService: DashboardService, private dateService: DateService) {}
 
-  ngOnInit(): void {
-    const lastYearTransactionsString = this.dashboardService.getLastYearTransactionsString();
+  ngOnChanges(): void {
+    const lastYearTransactionsString = this.dashboardService.getLastYearTransactionsString(this.transactions);
     const numberOfTransactionsPerMonth: number[] = [];
     const date = new Date();
     date.setMonth(new Date().getMonth() + 1);
@@ -56,5 +59,6 @@ export class YearlyChartComponent implements OnInit {
     } while (date.getMonth() !== new Date().getMonth() + 1);
     this.barChartData.labels = this.dateService.getLast12MonthsToDisplay();
     this.barChartData.datasets[0]['data'] = numberOfTransactionsPerMonth;
+    this.chart?.update();
   }
 }

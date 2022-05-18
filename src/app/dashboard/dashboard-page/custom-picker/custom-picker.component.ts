@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
@@ -11,10 +11,11 @@ import { DashboardService } from '../../dashboard.service';
   selector: 'app-custom-picker',
   templateUrl: './custom-picker.component.html',
   styleUrls: ['./custom-picker.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomPickerComponent implements OnInit {
-  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   @Input() transactions: Itransactions[];
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   rangeForm: FormGroup;
   tommorow: Date = new Date();
   startDate: Date;
@@ -69,7 +70,11 @@ export class CustomPickerComponent implements OnInit {
   }
 
   makeChart(): void {
-    const chosenTransactions = this.dashboardService.getFilteredAndSortedTransactions(this.startDate, this.endDate);
+    const chosenTransactions = this.dashboardService.getFilteredAndSortedTransactions(
+      this.startDate,
+      this.endDate,
+      this.transactions
+    );
     const labels: string[] = [];
     const numberOfTransactionsPerDay: number[] = [];
     const counter: Date = this.startDate;

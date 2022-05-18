@@ -7,6 +7,16 @@ export const getTransactionsListSuccess = createAction(
 );
 export const getTransactionsListFailure = createAction('[Transactions] Get List Failure', props<{ error: string }>());
 
+export const getTransactionWithIdSuccess = createAction(
+  '[Transactions API] Get Transaction Success',
+  props<{ transaction: Itransactions }>()
+);
+
+export const getTransactionWithIdFailure = createAction(
+  '[Transactions API] Get Transaction Failure',
+  props<{ error: string }>()
+);
+
 export const updateTransactionsListSuccess = createAction(
   '[Transactions API] Update List Success',
   props<{ transaction: Itransactions }>()

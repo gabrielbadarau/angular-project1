@@ -1,23 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Itransactions } from '../transactions/transactions';
-import { tap } from 'rxjs';
 import { DateService } from '../shared/date.service';
-import { TransactionsService } from '../transactions/transactions.service';
 
 @Injectable()
 export class DashboardService {
-  transactions: Itransactions[] = [];
+  constructor(private dateService: DateService) {}
 
-  transactions$ = this.transactionsService.transactions$.pipe(tap((data) => (this.transactions = data)));
-
-  constructor(private dateService: DateService, private transactionsService: TransactionsService) {}
-
-  getTransactionsDatesString(): string[] {
-    return this.transactions.map((transaction) => transaction.date);
+  getTransactionsDatesString(transactions: Itransactions[]): string[] {
+    return transactions.map((transaction) => transaction.date);
   }
 
-  getLastYearTransactionsString(): string[] {
-    const transactionsDatesString = this.getTransactionsDatesString();
+  getLastYearTransactionsString(transactions: Itransactions[]): string[] {
+    const transactionsDatesString = this.getTransactionsDatesString(transactions);
     return transactionsDatesString.filter((date) => {
       const lastYear = new Date().getFullYear() - 1;
       const lastMonth = new Date().getMonth() + 2;
@@ -27,8 +21,8 @@ export class DashboardService {
     });
   }
 
-  getFilteredAndSortedTransactions(a: Date, b: Date): Itransactions[] {
-    const filteredAndSortedTransactions = this.transactions.filter((transaction) => {
+  getFilteredAndSortedTransactions(a: Date, b: Date, transactions: Itransactions[]): Itransactions[] {
+    const filteredAndSortedTransactions = transactions.filter((transaction) => {
       const transactionDate = this.dateService.transformStringToDate(transaction.date);
       return transactionDate.getTime() >= a.getTime() && transactionDate.getTime() <= b.getTime();
     });
