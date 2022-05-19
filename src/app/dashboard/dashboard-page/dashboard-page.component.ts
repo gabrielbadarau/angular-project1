@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { catchError, EMPTY, Subject } from 'rxjs';
-import { DashboardService } from '../dashboard.service';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { selectTransactionsError, selectTransactionsList } from 'src/app/transactions/state';
+import { getTransactionsList } from 'src/app/transactions/state/actions/transactions-page.actions';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -8,16 +9,13 @@ import { DashboardService } from '../dashboard.service';
   styleUrls: ['./dashboard-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardPageComponent {
-  private errorMessageSubject = new Subject<string>();
-  errorMessage$ = this.errorMessageSubject.asObservable();
+export class DashboardPageComponent implements OnInit {
+  errorMessage$ = this.store.pipe(select(selectTransactionsError));
+  transactions$ = this.store.pipe(select(selectTransactionsList));
 
-  transactions$ = this.dashboardService.transactions$.pipe(
-    catchError((err) => {
-      this.errorMessageSubject.next(err);
-      return EMPTY;
-    })
-  );
+  ngOnInit(): void {
+    this.store.dispatch(getTransactionsList());
+  }
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private store: Store) {}
 }

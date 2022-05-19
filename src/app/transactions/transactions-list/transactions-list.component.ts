@@ -3,7 +3,6 @@ import { TransactionsService } from '../transactions.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { State } from 'src/app/state/app.state';
 import { selectTransactionsError, selectTransactionsList } from '../state';
 import { TransactionsPageActions } from '../state/actions';
 
@@ -25,7 +24,7 @@ export class TransactionsListComponent implements OnInit {
     private transactionsService: TransactionsService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private store: Store<State>
+    private store: Store
   ) {}
 
   ngOnInit(): void {

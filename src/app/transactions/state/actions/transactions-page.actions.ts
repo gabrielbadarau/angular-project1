@@ -3,7 +3,10 @@ import { Itransactions } from '../../transactions';
 
 export const getTransactionsList = createAction('[Transactions Page] Get List');
 
-export const setTransactionId = createAction('[Transactions Page] Set Transaction Id', props<{ id: number }>());
+export const getTransactionWithId = createAction(
+  '[Transactions Page] Get Transaction With Id',
+  props<{ id: number }>()
+);
 
 export const setProductId = createAction('[Transactions Page] Set Product Id', props<{ id: number }>());
 

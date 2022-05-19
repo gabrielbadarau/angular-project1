@@ -10,6 +10,10 @@ export class TransactionsService {
 
   transactions$ = this.wrappedHttp.get<Itransactions[]>(this.transactionsUrl);
 
+  getTransactionWithId(id: number): Observable<Itransactions> {
+    return this.wrappedHttp.get<Itransactions>(this.transactionsUrl + `/${id}`);
+  }
+
   private toastMessageSubject = new Subject<[value: boolean, action: string]>();
   toastMessageAction$ = this.toastMessageSubject.asObservable();
 

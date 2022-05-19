@@ -5,10 +5,9 @@ import { select, Store } from '@ngrx/store';
 import { ConfirmationService } from 'primeng/api';
 import { Subject, tap } from 'rxjs';
 import { DateService } from 'src/app/shared/date.service';
-import { State } from 'src/app/state/app.state';
 import { Itransactions } from '../transactions';
 import { TransactionsPageActions } from '../state/actions';
-import { selectTransactionsError, selectTransactionWithId } from '../state';
+import { selectTransactionsError, selectCurrentTransaction } from '../state';
 
 @Component({
   selector: 'app-transaction-edit',
@@ -24,9 +23,13 @@ export class TransactionEditComponent implements OnInit {
   showModal = false;
 
   transaction$ = this.store.pipe(
-    select(selectTransactionWithId),
+    select(selectCurrentTransaction),
     tap((data) =>
-      data ? this.displayTransaction(data) : this.store.dispatch(TransactionsPageActions.getTransactionsList())
+      data
+        ? this.displayTransaction(data)
+        : this.store.dispatch(
+            TransactionsPageActions.getTransactionWithId({ id: +this.route.snapshot.paramMap.get('id') })
+          )
     )
   );
   errorMessage$ = this.store.pipe(select(selectTransactionsError));
@@ -47,7 +50,7 @@ export class TransactionEditComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
     private dateService: DateService,
-    private store: Store<State>
+    private store: Store
   ) {}
 
   showModalAction(value: boolean) {
@@ -55,7 +58,6 @@ export class TransactionEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(TransactionsPageActions.setTransactionId({ id: +this.route.snapshot.paramMap.get('id') }));
     this.transactionForm = this.fb.group({
       id: [null, [Validators.required, Validators.min(1)]],
       date: ['', Validators.required],

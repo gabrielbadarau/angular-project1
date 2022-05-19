@@ -4,14 +4,14 @@ import { TransactionsPageActions, TransactionsApiActions } from './actions';
 
 export interface TransactionsState {
   transactions: Itransactions[];
-  currentTransactionId: number;
+  currentTransaction: Itransactions;
   currentProductId: number;
   error: string;
 }
 
 const initialState: TransactionsState = {
   transactions: [],
-  currentTransactionId: null,
+  currentTransaction: null,
   currentProductId: null,
   error: '',
 };
@@ -22,22 +22,26 @@ export const transactionsReducer = createReducer<TransactionsState>(
     return {
       ...state,
       transactions: action.transactions,
+      currentTransaction: null,
+      currentProductId: null,
     };
   }),
   on(TransactionsApiActions.getTransactionsListFailure, (state, action): TransactionsState => {
     return {
       ...state,
-      transactions: [],
-      currentTransactionId: null,
-      currentProductId: null,
       error: action.error,
     };
   }),
-  on(TransactionsPageActions.setTransactionId, (state, action): TransactionsState => {
+  on(TransactionsApiActions.getTransactionWithIdSuccess, (state, action): TransactionsState => {
     return {
       ...state,
-      currentTransactionId: action.id,
-      currentProductId: null,
+      currentTransaction: action.transaction,
+    };
+  }),
+  on(TransactionsApiActions.getTransactionWithIdFailure, (state, action): TransactionsState => {
+    return {
+      ...state,
+      error: action.error,
     };
   }),
   on(TransactionsPageActions.setProductId, (state, action): TransactionsState => {
@@ -58,9 +62,6 @@ export const transactionsReducer = createReducer<TransactionsState>(
   on(TransactionsApiActions.updateTransactionsListFailure, (state, action): TransactionsState => {
     return {
       ...state,
-      transactions: [],
-      currentTransactionId: null,
-      currentProductId: null,
       error: action.error,
     };
   }),
@@ -74,9 +75,6 @@ export const transactionsReducer = createReducer<TransactionsState>(
   on(TransactionsApiActions.deleteTransactionFailure, (state, action): TransactionsState => {
     return {
       ...state,
-      transactions: [],
-      currentTransactionId: null,
-      currentProductId: null,
       error: action.error,
     };
   })

@@ -5,18 +5,13 @@ const selectTransactionsFeatureState = createFeatureSelector<TransactionsState>(
 
 export const selectTransactionsList = createSelector(selectTransactionsFeatureState, (state) => state.transactions);
 export const selectTransactionsError = createSelector(selectTransactionsFeatureState, (state) => state.error);
-export const selectTransactionId = createSelector(
+export const selectCurrentTransaction = createSelector(
   selectTransactionsFeatureState,
-  (state) => state.currentTransactionId
-);
-export const selectTransactionWithId = createSelector(
-  selectTransactionsList,
-  selectTransactionId,
-  (transactions, currentTransactionId) => transactions.find((transaction) => transaction.id === currentTransactionId)
+  (state) => state.currentTransaction
 );
 export const selectProductId = createSelector(selectTransactionsFeatureState, (state) => state.currentProductId);
 export const selectProductWithId = createSelector(
-  selectTransactionWithId,
+  selectCurrentTransaction,
   selectProductId,
   (transaction, currentProductId) => transaction.products.find((product) => product.id === currentProductId)
 );
