@@ -1,0 +1,37 @@
+<div class="p-error" *ngIf="errorMessage">
+  <h2>{{ errorMessage }}</h2>
+</div>
+<div *ngIf="users">
+  <p-table [value]="users">
+    <ng-template pTemplate="header">
+      <tr>
+        <th i18n>First Name</th>
+        <th i18n>Last Name</th>
+        <th i18n>Email</th>
+        <th i18n>Role</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr class="row">
+        <td [routerLink]="['/users', user.id]">{{ user.first_name }}</td>
+        <td [routerLink]="['/users', user.id]">{{ user.last_name }}</td>
+        <td [routerLink]="['/users', user.id]">{{ user.email }}</td>
+        <td [routerLink]="['/users', user.id]">{{ user.role }}</td>
+        <td [routerLink]="['/users', user.id, 'edit']">
+          <p-button type="button">Edit</p-button>
+        </td>
+        <td>
+          <button (click)="clickDelete(user)" pButton icon="pi pi-trash"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
+
+<p-toast>
+  <div *ngIf="toastMessage"></div>
+</p-toast>

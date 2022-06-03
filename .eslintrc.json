@@ -9,7 +9,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "@nrwl/nx"],
   "rules": {
     "ngrx/select-style": ["warn", "operator"]
   },
@@ -17,6 +17,25 @@
     {
       "files": ["*.ts"],
       "extends": ["plugin:ngrx/recommended"]
+    },
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "ignorePatterns": ["**/*"]
 }

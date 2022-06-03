@@ -1,33 +1,6 @@
 {
   "transactions": [
     {
-      "id": 100001,
-      "date": "12.16.2021",
-      "category": "expenses",
-      "receiver": "emag",
-      "price": 600,
-      "VAT": 10,
-      "total_price": 0,
-      "products": [
-        {
-          "description": "RTX 3080",
-          "id": 1001,
-          "amount": 1,
-          "price": 1500,
-          "VAT": 10,
-          "total_price": 0
-        },
-        {
-          "description": "RTX 3070Ti",
-          "id": 2001,
-          "amount": 1,
-          "price": 1000,
-          "VAT": 10,
-          "total_price": 0
-        }
-      ]
-    },
-    {
       "id": 100002,
       "date": "02.07.2022",
       "category": "expenses",
@@ -1047,15 +1020,6 @@
     }
   ],
   "users": [
-    {
-      "first_name": "Daniel",
-      "last_name": "Mihu",
-      "id": 1005,
-      "email": "Mihai_Mihu@gmail.com",
-      "password": "rtyfghvbn",
-      "role": "User",
-      "permissions": "Genin"
-    },
     {
       "first_name": "Anastasia",
       "last_name": "Mirela",
