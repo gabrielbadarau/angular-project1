@@ -1,9 +1,9 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
-import { AppComponent } from './app.component';
+import { UsersListComponent } from './users-list.component';
 
 describe('ButtonComponent', () => {
-  let spectator: Spectator<AppComponent>;
-  const createComponent = createComponentFactory(AppComponent);
+  let spectator: Spectator<UsersListComponent>;
+  const createComponent = createComponentFactory(UsersListComponent);
 
   beforeEach(() => spectator = createComponent());
 
