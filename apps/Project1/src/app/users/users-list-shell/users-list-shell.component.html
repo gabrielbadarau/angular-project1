@@ -1,0 +1,7 @@
+<app-users-list
+  [users]="users$ | async"
+  [errorMessage]="errorMessage$ | async"
+  [toastMessage]="toastMessage$ | async"
+  (confirmDelete)="confirmDelete($event)"
+>
+</app-users-list>
