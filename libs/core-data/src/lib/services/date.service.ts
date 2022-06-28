@@ -18,7 +18,7 @@ export class DateService {
   getLast4Weeks(date: number): Date[][] {
     const last4Weeks: Date[][] = [];
     for (let i = 21; i >= 0; i -= 7) {
-      last4Weeks?.push(this.getLast7Dates(date - i));
+      last4Weeks.push(this.getLast7Dates(date - i));
     }
     return last4Weeks;
   }
